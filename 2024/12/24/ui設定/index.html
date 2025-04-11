@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/akasha/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/akasha/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/akasha/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/akasha/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/akasha/css/main.css">
+
+
+<link rel="stylesheet" href="/akasha/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"tea9297.github.io","root":"/akasha/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="安裝只要你安裝了akasha，便可以直接使用akasha_ui，在terminal執行: 1$ akasha ui  便可以在瀏覽器上開啟，開始使用akasha ui     Docker安裝若要使用docker安裝，可以直接下載image 1$ docker pull ccchang0518&#x2F;akasha-ui:1.0  如要使用gpu來推論llama-cpp模型(.gguf) 1$ docke">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ui設定">
+<meta property="og:url" content="https://tea9297.github.io/akasha/2024/12/24/ui%E8%A8%AD%E5%AE%9A/index.html">
+<meta property="og:site_name" content="akasha 0.9 使用手冊">
+<meta property="og:description" content="安裝只要你安裝了akasha，便可以直接使用akasha_ui，在terminal執行: 1$ akasha ui  便可以在瀏覽器上開啟，開始使用akasha ui     Docker安裝若要使用docker安裝，可以直接下載image 1$ docker pull ccchang0518&#x2F;akasha-ui:1.0  如要使用gpu來推論llama-cpp模型(.gguf) 1$ docke">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://hackmd.io/_uploads/B1glkq19a.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/BJ0TRYJcT.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SyS6g5yqa.png">
+<meta property="article:published_time" content="2024-12-24T15:59:59.000Z">
+<meta property="article:modified_time" content="2024-10-21T03:39:36.907Z">
+<meta property="article:author" content="Chih Chuan Chang&lt;ccchang@iii.org.tw&gt;">
+<meta property="article:tag" content="akasha-UI">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hackmd.io/_uploads/B1glkq19a.png">
+
+<link rel="canonical" href="https://tea9297.github.io/akasha/2024/12/24/ui%E8%A8%AD%E5%AE%9A/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>ui設定 | akasha 0.9 使用手冊</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/akasha/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">akasha 0.9 使用手冊</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">akasha 0.9 manual</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/akasha/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/akasha/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://tea9297.github.io/akasha/2024/12/24/ui%E8%A8%AD%E5%AE%9A/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/akasha/images/avatar.gif">
+      <meta itemprop="name" content="Chih Chuan Chang<ccchang@iii.org.tw>">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="akasha 0.9 使用手冊">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ui設定
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2024-12-24 23:59:59" itemprop="dateCreated datePublished" datetime="2024-12-24T23:59:59+08:00">2024-12-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2024-10-21 11:39:36" itemprop="dateModified" datetime="2024-10-21T11:39:36+08:00">2024-10-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/akasha/categories/UI/" itemprop="url" rel="index"><span itemprop="name">UI</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="安裝"><a href="#安裝" class="headerlink" title="安裝"></a>安裝</h2><p>只要你安裝了akasha，便可以直接使用akasha_ui，在terminal執行:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">akasha ui</span></span><br></pre></td></tr></table></figure>
+
+<p>便可以在瀏覽器上<a target="_blank" rel="noopener" href="http://localhost:8501/">開啟</a>，開始使用akasha ui</p>
+</br>
+</br>
+
+
+<h3 id="Docker安裝"><a href="#Docker安裝" class="headerlink" title="Docker安裝"></a>Docker安裝</h3><p>若要使用docker安裝，可以直接下載image</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker pull ccchang0518/akasha-ui:1.0</span></span><br></pre></td></tr></table></figure>
+
+<p>如要使用gpu來推論llama-cpp模型(.gguf)</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker pull ccchang0518/akasha-ui:llamacpp</span></span><br></pre></td></tr></table></figure>
+
+<p>執行image</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker run --gpus all -v ./model:/app/model  -v ./docs:/app/docs -v ./chromadb:/app/chromadb -p 8501:8501 akasha-llamacpp-ui:0.1</span></span><br></pre></td></tr></table></figure>
+
+
+</br>
+</br>
+
+<h2 id="上傳文件檔"><a href="#上傳文件檔" class="headerlink" title="上傳文件檔"></a>上傳文件檔</h2><p>上傳你需要的文件檔案，並取資料夾名稱，創立知識庫。</p>
+<p><em><strong>請注意文件檔只允許(.docx, .txt, .pdf)</strong></em></p>
+<p><img src="https://hackmd.io/_uploads/B1glkq19a.png" alt="ui_upload"></p>
+</br>
+</br>
+
+<h2 id="設定"><a href="#設定" class="headerlink" title="設定"></a>設定</h2><p>在設定頁面，可以選擇要詢問的知識庫和調整各種參數、選擇不同語言模型。</p>
+<p><em><strong>若使用openAI模型，請在左側輸入 openAI的key，azure openAI則需要額外輸入url。</strong></em></p>
+<p><img src="https://hackmd.io/_uploads/BJ0TRYJcT.png" alt="ui_setting"></p>
+<h2 id="手動增加模型"><a href="#手動增加模型" class="headerlink" title="手動增加模型"></a>手動增加模型</h2><p>如果你想使用不同的語言模型，可以至<a target="_blank" rel="noopener" href="https://huggingface.co/">huggingface</a>下載模型到”&#x2F;model”資料夾，模型便會加至設定中</p>
+<p><img src="https://hackmd.io/_uploads/SyS6g5yqa.png" alt="ui_model"></p>
+<p>設定完成後，便可開始使用akasha ui</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/akasha/tags/akasha-UI/" rel="tag"># akasha-UI</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/akasha/2024/12/24/ui%E6%93%8D%E4%BD%9C/" rel="prev" title="ui操作">
+      <i class="fa fa-chevron-left"></i> ui操作
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/akasha/2024/12/25/XML%E6%A0%BC%E5%BC%8F/" rel="next" title="XML格式">
+      XML格式 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%9D"><span class="nav-number">1.</span> <span class="nav-text">安裝</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker%E5%AE%89%E8%A3%9D"><span class="nav-number">1.1.</span> <span class="nav-text">Docker安裝</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8A%E5%82%B3%E6%96%87%E4%BB%B6%E6%AA%94"><span class="nav-number">2.</span> <span class="nav-text">上傳文件檔</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A8%AD%E5%AE%9A"><span class="nav-number">3.</span> <span class="nav-text">設定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%8B%E5%8B%95%E5%A2%9E%E5%8A%A0%E6%A8%A1%E5%9E%8B"><span class="nav-number">4.</span> <span class="nav-text">手動增加模型</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Chih Chuan Chang<ccchang@iii.org.tw></p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/akasha/archives/">
+        
+          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分類</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">標籤</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Chih Chuan Chang<ccchang@iii.org.tw></span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/akasha/lib/anime.min.js"></script>
+  <script src="/akasha/lib/velocity/velocity.min.js"></script>
+  <script src="/akasha/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/akasha/js/utils.js"></script>
+
+<script src="/akasha/js/motion.js"></script>
+
+
+<script src="/akasha/js/schemes/muse.js"></script>
+
+
+<script src="/akasha/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
