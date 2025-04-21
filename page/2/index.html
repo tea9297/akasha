@@ -147,354 +147,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://tea9297.github.io/akasha/2024/12/29/ask_agent/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/akasha/images/avatar.gif">
-      <meta itemprop="name" content="Chih Chuan Chang<ccchang@iii.org.tw>">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="akasha 0.9 使用手冊">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/akasha/2024/12/29/ask_agent/" class="post-title-link" itemprop="url">ask_agent</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-
-              <time title="創建時間：2024-12-29 19:59:59" itemprop="dateCreated datePublished" datetime="2024-12-29T19:59:59+08:00">2024-12-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2024-11-13 16:00:32" itemprop="dateModified" datetime="2024-11-13T16:00:32+08:00">2024-11-13</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分類於</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/akasha/categories/%E6%96%87%E6%AA%94%E5%95%8F%E7%AD%94/" itemprop="url" rel="index"><span itemprop="name">文檔問答</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="ask-agent"><a href="#ask-agent" class="headerlink" title="ask_agent"></a>ask_agent</h2><p>如果你想詢問較複雜的問題，使用ask_agent，語言模型會將你的問題拆解來提供較好的回答。</p>
-<h3 id="example"><a href="#example" class="headerlink" title="example"></a>example</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ak = akasha.Doc_QA(</span><br><span class="line">    verbose=<span class="literal">True</span>,</span><br><span class="line">    chunk_size=<span class="number">500</span>,</span><br><span class="line">    model=<span class="string">&quot;openai:gpt-3.5-turbo&quot;</span>,</span><br><span class="line">)</span><br><span class="line">res = ak.ask_agent(</span><br><span class="line">    <span class="string">&quot;./docs/mic/&quot;</span>,     </span><br><span class="line">    <span class="string">&quot;LPWAN和5G的區別是什麼?&quot;</span>,</span><br><span class="line">)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">LPWAN和5G的主要區別在於他們的頻寬、延遲、成本和應用場景。</span><br><span class="line"></span><br><span class="line">LPWAN的頻寬相對較低（0.3 KBps – 50KBps），延遲較高（秒 - 分），且成本較低。它的主要優點是低耗能、支援長距離傳輸，並且可以連接大量的設備。然而，由於其頻寬和延遲的限制，LPWAN在製造業中的</span><br><span class="line">應用主要適用於非即時、非關鍵性的應用，例如環境污染偵測、照明、人員移動等，且須長時間穩定使用的應用情境。</span><br><span class="line"></span><br><span class="line">相較之下，5G提供的頻寬範圍在1-10 Gbps，而延遲則在1-10 ms之間，成本較高。這使得5G非常適合需要高時序精密度的應用，例如異質設備協作、遠端操控、混合現實（MR）巡檢維修等。此外，5G網路在大型</span><br><span class="line">廠區中，相較於Wi-Fi，無移交控制（Handover）中斷問題，因此更適合如低延遲、快速移動型的自主移動機器人（AMR）或無人機（Drone）廣域應用。然而，5G私網的建置成本相對昂貴，可能會影響企業的導 </span><br><span class="line">入意願。</span><br></pre></td></tr></table></figure>
-
-
-<h5 id="self-model-obj的詳細資訊可參考語言模型"><a href="#self-model-obj的詳細資訊可參考語言模型" class="headerlink" title="self.model_obj的詳細資訊可參考語言模型"></a>self.model_obj的詳細資訊可參考<a href="/2024/12/26/%E8%AA%9E%E8%A8%80%E6%A8%A1%E5%9E%8B/">語言模型</a></h5><h5 id="self-embeddings-obj的詳細資訊可參考-文件搜尋-嵌入模型"><a href="#self-embeddings-obj的詳細資訊可參考-文件搜尋-嵌入模型" class="headerlink" title="self.embeddings_obj的詳細資訊可參考[文件搜尋]嵌入模型"></a>self.embeddings_obj的詳細資訊可參考[文件搜尋]<a href="/2024/12/26/%E5%B5%8C%E5%85%A5%E6%A8%A1%E5%9E%8B/">嵌入模型</a></h5>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://tea9297.github.io/akasha/2024/12/28/auto_create_questionset/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/akasha/images/avatar.gif">
-      <meta itemprop="name" content="Chih Chuan Chang<ccchang@iii.org.tw>">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="akasha 0.9 使用手冊">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/akasha/2024/12/28/auto_create_questionset/" class="post-title-link" itemprop="url">auto_create_questionset</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-
-              <time title="創建時間：2024-12-28 23:59:59" itemprop="dateCreated datePublished" datetime="2024-12-28T23:59:59+08:00">2024-12-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2024-11-14 16:12:05" itemprop="dateModified" datetime="2024-11-14T16:12:05+08:00">2024-11-14</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分類於</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/akasha/categories/%E6%A8%A1%E5%9E%8B%E8%A9%95%E4%BC%B0/" itemprop="url" rel="index"><span itemprop="name">模型評估</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="自動產生問題"><a href="#自動產生問題" class="headerlink" title="自動產生問題"></a>自動產生問題</h2><p>如果您不想自己創建問題集來評估當前參數的性能，您可以使用 <em><strong>eval.auto_create_questionset</strong></em> 功能自動生成一個包含參考答案的問題集。隨後，您可以使用 <em><strong>eval.auto_evaluation</strong></em> 獲取評估指標，如 Bert_score、Rouge 和 LLM_score（對於問答問題集），以及單選問題集的正確率。這些分數範圍從 0 到 1，較高的值表示生成的回答與參考答案更接近。</p>
-<p>如範例，以下創建了一個名為 ‘mic_essay.txt’ 的問題集文本文件，其中包含十個問題和參考答案。每個問題都是從 ‘doc&#x2F;mic&#x2F;‘ 目錄中給定文檔的內容段落中隨機生成的。然後，您可以使用該問題集文本文件來評估要測試的參數的性能。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">import akasha.eval as eval</span><br><span class="line"></span><br><span class="line">eva = eval.Model_Eval(question_style=&quot;essay&quot;, search_type=&#x27;merge&#x27;,\</span><br><span class="line">      model=&quot;openai:gpt-3.5-turbo&quot;, embeddings=&quot;openai:text-embedding-ada-002&quot;,record_exp=&quot;exp_mic_auto_questionset&quot;)</span><br><span class="line"></span><br><span class="line">eva.auto_create_questionset(doc_path=&quot;doc/mic/&quot;, question_num=10, output_file_path=&quot;questionset/mic_essay.txt&quot;)</span><br><span class="line"></span><br><span class="line">bert_score, rouge, llm_score, tol_tokens = eva.auto_evaluation(questionset_file=&quot;questionset/mic_essay.txt&quot;, doc_path=&quot;doc/mic/&quot;, question_style = &quot;essay&quot;, record_exp=&quot;exp_mic_auto_evaluation&quot;,topK=3,search_type=&quot;svm&quot;)</span><br><span class="line">print(&quot;bert_score: &quot;, bert_score, &quot;\nrouge: &quot;, rouge, &quot;\nllm_score: &quot;, llm_score)</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bert_score: 0.782</span><br><span class="line">rouge: 0.81</span><br><span class="line">llm_score: 0.393</span><br></pre></td></tr></table></figure>
-
-</br>
-</br>
-
-<h2 id="使用question-type測試不同方面的能力"><a href="#使用question-type測試不同方面的能力" class="headerlink" title="使用question_type測試不同方面的能力"></a>使用question_type測試不同方面的能力</h2><p>question_type 参数提供了四種問題類型：<em><strong>fact</strong></em>、<em><strong>summary</strong></em>、<em><strong>irrelevant</strong></em>、<em><strong>compared</strong></em>，預設是 fact。 </p>
-<ol>
-<li>fact測試回答一般事實的能力</li>
-<li>summary測試模型做摘要的能力</li>
-<li>irrelevant測試模型能否分辨文件中不存在答案的問題</li>
-<li>compared測試模型比較不同事物的能力</li>
-</ol>
-<h3 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">import akasha.eval as eval</span><br><span class="line"></span><br><span class="line">eva = eval.Model_Eval(search_type=&#x27;merge&#x27;, question_type = &quot;irrelevant&quot;, model=&quot;openai:gpt-3.5-turbo&quot;, record_exp=&quot;exp_mic_auto_questionset&quot;)</span><br><span class="line"></span><br><span class="line">eva.auto_create_questionset(doc_path=&quot;doc/mic/&quot;, question_num=10, output_file_path=&quot;questionset/mic_irre.txt&quot;)</span><br><span class="line"></span><br><span class="line">bert_score, rouge, llm_score, tol_tokens = eva.auto_evaluation(questionset_file=&quot;questionset/mic_irre.txt&quot;, doc_path=&quot;doc/mic/&quot;, question_style = &quot;essay&quot;, record_exp=&quot;exp_mic_auto_evaluation&quot;,search_type=&quot;svm&quot;)</span><br></pre></td></tr></table></figure>
-
-</br>
-</br>
-
-<h2 id="指定問題集主題"><a href="#指定問題集主題" class="headerlink" title="指定問題集主題"></a>指定問題集主題</h2><p>如果你想生成特定主題的問題，你可以使用 <em><strong>create_topic_questionset</strong></em> 函數，它會使用輸入的主題在文檔中找到相關的文件段落並生成問題集。</p>
-<h3 id="範例-1"><a href="#範例-1" class="headerlink" title="範例"></a>範例</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">import akasha.eval as eval</span><br><span class="line"></span><br><span class="line">eva = eval.Model_Eval(search_type=&#x27;merge&#x27;,question_type = &quot;irrelevant&quot;, model=&quot;openai:gpt-3.5-turbo&quot;, record_exp=&quot;exp_mic_auto_questionset&quot;)</span><br><span class="line"></span><br><span class="line">eva.create_topic_questionset(doc_path=&quot;doc/mic/&quot;, topic= &quot;工業4.0&quot;, question_num=3, output_file_path=&quot;questionset/mic_topic_irre.txt&quot;)</span><br><span class="line"></span><br><span class="line">bert_score, rouge, llm_score, tol_tokens = eva.auto_evaluation(questionset_file=&quot;questionset/mic_topic_irre.txt&quot;, doc_path=&quot;doc/mic/&quot;, question_style = &quot;essay&quot;, record_exp=&quot;exp_mic_auto_evaluation&quot;,search_type=&quot;svm&quot;)</span><br></pre></td></tr></table></figure>
-
-
-
-
-<h5 id="self-db的詳細資訊可參考向量資料庫"><a href="#self-db的詳細資訊可參考向量資料庫" class="headerlink" title="self.db的詳細資訊可參考向量資料庫"></a>self.db的詳細資訊可參考<a href="/2024/12/26/%E5%90%91%E9%87%8F%E8%B3%87%E6%96%99%E5%BA%AB/">向量資料庫</a></h5><h5 id="self-model-obj的詳細資訊可參考語言模型"><a href="#self-model-obj的詳細資訊可參考語言模型" class="headerlink" title="self.model_obj的詳細資訊可參考語言模型"></a>self.model_obj的詳細資訊可參考<a href="/2024/12/26/%E8%AA%9E%E8%A8%80%E6%A8%A1%E5%9E%8B/">語言模型</a></h5>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://tea9297.github.io/akasha/2024/12/28/auto_evaluation/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/akasha/images/avatar.gif">
-      <meta itemprop="name" content="Chih Chuan Chang<ccchang@iii.org.tw>">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="akasha 0.9 使用手冊">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/akasha/2024/12/28/auto_evaluation/" class="post-title-link" itemprop="url">auto_evaluation</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-
-              <time title="創建時間：2024-12-28 22:59:59" itemprop="dateCreated datePublished" datetime="2024-12-28T22:59:59+08:00">2024-12-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2024-11-14 16:29:16" itemprop="dateModified" datetime="2024-11-14T16:29:16+08:00">2024-11-14</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分類於</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/akasha/categories/%E6%A8%A1%E5%9E%8B%E8%A9%95%E4%BC%B0/" itemprop="url" rel="index"><span itemprop="name">模型評估</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Auto-Evaluation"><a href="#Auto-Evaluation" class="headerlink" title="Auto Evaluation"></a>Auto Evaluation</h2><p>若要測試各種參數對語言模型回答的好壞，可以使用auto_evalution函數。首先，您需要基於您要使用的文檔構建一個問題集(.txt)。<br>您可以生成單選題文件或問答題文件。</p>
-<ol>
-<li>對於<em><strong>單選題文件</strong></em>，每個選項和正確答案之間用制表符(\t)分隔，每行是一個問題，如範例: <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">應回收廢塑膠容器材質種類不包含哪種?	1.聚丙烯（PP）	2.聚苯乙烯（PS）	3.聚氯乙烯（PVC）	4.低密度聚乙烯（LDPE）	4</span><br><span class="line">庫存盤點包括庫存全盤作業及不定期抽盤作業，盤點計畫應包括下列項目不包含哪項?	1.盤點差異之處理	2.盤點清冊	3.各項物品存放區域配置圖	4.庫存全盤日期及參加盤點人員名單	1</span><br><span class="line">以下何者不是環保署指定之公民營地磅機構?	1.中森加油站企業有限公司	2.台益地磅站	3.大眾地磅站	4.新福行	4</span><br></pre></td></tr></table></figure>
- 函式將返回問題集的正確率和使用的token量，每個問題的詳細內容儲存在logs中。 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> akasha.<span class="built_in">eval</span> <span class="keyword">as</span> <span class="built_in">eval</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> akasha</span><br><span class="line">dir_path = <span class="string">&quot;doc/pvc/&quot;</span></span><br><span class="line">exp_name = <span class="string">&quot;exp_akasha_auto_evaluation&quot;</span></span><br><span class="line"></span><br><span class="line">eva = <span class="built_in">eval</span>.Model_Eval(question_style=<span class="string">&quot;single_choice&quot;</span>, search_type=<span class="string">&#x27;merge&#x27;</span>,\</span><br><span class="line">    model=<span class="string">&quot;openai:gpt-3.5-turbo&quot;</span>, embeddings=<span class="string">&quot;openai:text-embedding-ada-002&quot;</span>,record_exp=exp_name)</span><br><span class="line"><span class="built_in">print</span>(eva.auto_evaluation(<span class="string">&quot;question_pvc.txt&quot;</span>, dir_path ))</span><br><span class="line"><span class="comment">## correct rate: 0.9, tokens: 3228 ##</span></span><br></pre></td></tr></table></figure></li>
-<li>對於<em><strong>問答題文件</strong></em>，每個問題之前有 “問題：”，每個參考答案之前有 “答案：”。每個問題之間用兩個換行符 (\n\n) 分隔。<br> 問答題類的問題文件，會回傳bert的平均分數, rouge的平均分數, llm_score的平均分數, 文件使用的總token數量 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">問題：根據文件中的訊息，智慧製造的複雜性已超越系統整合商的負荷程度，未來產業鏈中的角色將傾向朝共和共榮共創智慧製造商機，而非過往的單打獨鬥模式發展。請問為什麼  供  應商、電信商、軟體開發商、平台商、雲端服務供應商、系統整合商等角色會傾向朝共和共榮共創智慧製造商機的方向發展？</span><br><span class="line">答案：因為智慧製造的複雜性已超越系統整合商的負荷程度，單一角色難以完成整個智慧製造的需求，而共和共榮共創的模式可以整合各方的優勢，共同創造智慧製造的商機。</span><br><span class="line"></span><br><span class="line">問題：根據文件中提到的資訊技術商（IT）和營運技術商（OT），請列舉至少兩個邊緣運算產品或解決方案。</span><br><span class="line">答案：根據文件中的資訊，NVIDIA的邊緣運算產品包括Jetson系列和EGX系列，而IBM的邊緣運算產品包括IBM Edge Application Manager和IBM Watson Anywhere。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
- <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> akasha.<span class="built_in">eval</span> <span class="keyword">as</span> <span class="built_in">eval</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> akasha</span><br><span class="line">dir_path = <span class="string">&quot;doc/pvc/&quot;</span></span><br><span class="line">exp_name = <span class="string">&quot;exp_akasha_auto_evaluation&quot;</span></span><br><span class="line"></span><br><span class="line">eva = <span class="built_in">eval</span>.Model_Eval(question_style=<span class="string">&quot;essay&quot;</span>, search_type=<span class="string">&#x27;merge&#x27;</span>,\</span><br><span class="line">    model=<span class="string">&quot;openai:gpt-3.5-turbo&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(eva.auto_evaluation(<span class="string">&quot;question_pvc_essay.txt&quot;</span>, dir_path ))</span><br><span class="line"><span class="comment">## correct rate: 0.9, tokens: 3228 ##</span></span><br></pre></td></tr></table></figure></li>
-</ol>
-<h2 id="Scores"><a href="#Scores" class="headerlink" title="Scores"></a>Scores</h2><p>對於問答題文件，因為無法準確判別語言模型的回答是否正確，我們使用bert_score, rouge_score, llm_score，藉由比較語言模型的回答與問答題文件中的參考答案，來得出0~1之間的分數</p>
-<h3 id="bert-score"><a href="#bert-score" class="headerlink" title="bert-score"></a>bert-score</h3><p>使用bert-score套件計算回答與參考答案的每個token之間的contextual embeddings similarity.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> akasha</span><br><span class="line"><span class="keyword">from</span> akasha.<span class="built_in">eval</span>.scores <span class="keyword">import</span> get_bert_score</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">llm_output = <span class="string">&quot;「五軸」指的是在機械加工或製造過程中使用的五軸數控（CNC）機床。這些機床可以在五個不同的軸上同時移動和旋轉工件或刀具，讓加工變得更靈活與精確。五軸機床一般包含三個直線軸（X、Y、Z）和兩個旋轉軸（A、B），這樣設計的目的是讓機床能從多個角度對工件進行加工，而不必在不同的角度之間反覆夾持和移動工件。&quot;</span></span><br><span class="line"></span><br><span class="line">ref_ans = <span class="string">&quot;根據文件中提到的內容，5軸工具機相較於3軸工具機能夠進行複雜形狀加工，並在加工精密度、自動化方面佔據優勢。&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">score = get_bert_score(llm_output, ref_ans)</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="ROUGE-score"><a href="#ROUGE-score" class="headerlink" title="ROUGE-score"></a>ROUGE-score</h3><p>將語言模型的回答與問答題文件中的參考答案進行分詞後，藉由ROUGE 評估生成相似度分數</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> akasha</span><br><span class="line"><span class="keyword">from</span> akasha.<span class="built_in">eval</span>.scores <span class="keyword">import</span> get_rouge_score</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">llm_output = <span class="string">&quot;「五軸」指的是在機械加工或製造過程中使用的五軸數控（CNC）機床。這些機床可以在五個不同的軸上同時移動和旋轉工件或刀具，讓加工變得更靈活與精確。五軸機床一般包含三個直線軸（X、Y、Z）和兩個旋轉軸（A、B），這樣設計的目的是讓機床能從多個角度對工件進行加工，而不必在不同的角度之間反覆夾持和移動工件。&quot;</span></span><br><span class="line"></span><br><span class="line">ref_ans = <span class="string">&quot;根據文件中提到的內容，5軸工具機相較於3軸工具機能夠進行複雜形狀加工，並在加工精密度、自動化方面佔據優勢。&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">score = get_rouge_score(llm_output, ref_ans)</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="llm-score"><a href="#llm-score" class="headerlink" title="llm-score"></a>llm-score</h3><p>利用另一種語言模型，將語言模型的回答與問答題文件中的參考答案進行比較，生成相似度分數</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> akasha</span><br><span class="line"><span class="keyword">from</span> akasha.<span class="built_in">eval</span>.scores <span class="keyword">import</span> get_llm_score</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">llm_output = <span class="string">&quot;「五軸」指的是在機械加工或製造過程中使用的五軸數控（CNC）機床。這些機床可以在五個不同的軸上同時移動和旋轉工件或刀具，讓加工變得更靈活與精確。五軸機床一般包含三個直線軸（X、Y、Z）和兩個旋轉軸（A、B），這樣設計的目的是讓機床能從多個角度對工件進行加工，而不必在不同的角度之間反覆夾持和移動工件。&quot;</span></span><br><span class="line"></span><br><span class="line">ref_ans = <span class="string">&quot;根據文件中提到的內容，5軸工具機相較於3軸工具機能夠進行複雜形狀加工，並在加工精密度、自動化方面佔據優勢。&quot;</span></span><br><span class="line"></span><br><span class="line">model = <span class="string">&quot;openai:gpt-4o&quot;</span></span><br><span class="line">score = get_llm_score(llm_output, ref_ans, model=model)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://tea9297.github.io/akasha/2024/12/28/optimum_combination/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/akasha/images/avatar.gif">
-      <meta itemprop="name" content="Chih Chuan Chang<ccchang@iii.org.tw>">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="akasha 0.9 使用手冊">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/akasha/2024/12/28/optimum_combination/" class="post-title-link" itemprop="url">optimum_combination</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-
-              <time title="創建時間：2024-12-28 21:59:59" itemprop="dateCreated datePublished" datetime="2024-12-28T21:59:59+08:00">2024-12-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2024-11-13 16:02:45" itemprop="dateModified" datetime="2024-11-13T16:02:45+08:00">2024-11-13</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分類於</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/akasha/categories/%E6%A8%A1%E5%9E%8B%E8%A9%95%E4%BC%B0/" itemprop="url" rel="index"><span itemprop="name">模型評估</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Find-Optimum-Combination"><a href="#Find-Optimum-Combination" class="headerlink" title="Find Optimum Combination"></a>Find Optimum Combination</h2><p>若要測試所有可用的組合並找到最佳參數，您可以使用 optimum_combination 函數。您可以提供不同的嵌入模型、文件段落大小、語言模型、文件搜索方法以及最相關文檔的數量（topK），該函數將測試所有組合以找到根據給定的問題集和文檔的最佳組合。請注意，最佳得分組合是最高正確率組合，而最佳性價比組合是需要最少token以獲得正確答案的組合。</p>
-<h3 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">import akasha.eval as eval</span><br><span class="line">import os</span><br><span class="line">from dotenv import load_dotenv</span><br><span class="line">load_dotenv() </span><br><span class="line"></span><br><span class="line">os.environ[&quot;OPENAI_API_KEY&quot;] = &quot;your openAI key&quot;</span><br><span class="line">os.environ[&quot;HF_TOKEN&quot;] = &quot;your huggingface key&quot;</span><br><span class="line">dir_path = &quot;doc/pvc/&quot;</span><br><span class="line">exp_name = &quot;exp_akasha_optimum_combination&quot;</span><br><span class="line">embeddings_list = [&quot;hf:shibing624/text2vec-base-chinese&quot;, &quot;openai:text-embedding-ada-002&quot;]</span><br><span class="line">model_list = [&quot;openai:gpt-3.5-turbo&quot;,&quot;hf:FlagAlpha/Llama2-Chinese-13b-Chat-4bit&quot;,&quot;hf:meta-llama/Llama-2-7b-chat-hf&quot;,\</span><br><span class="line">            &quot;llama-gpu:model/llama-2-7b-chat.Q5_K_S.gguf&quot;, &quot;llama-gpu:model/llama-2-13b-chat.Q5_K_S.gguf&quot;]</span><br><span class="line"></span><br><span class="line">eva = eval.Model_Eval(question_style=&quot;single_choice&quot;)</span><br><span class="line">eva.optimum_combination(&quot;question_pvc.txt&quot;, dir_path,  embeddings_list = embeddings_list, model_list = model_list,</span><br><span class="line">            chunk_size_list=[200, 400, 600], search_type_list=[&quot;merge&quot;,&quot;tfidf&quot;,],record_exp=exp_name)</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Best correct rate:  1.000</span><br><span class="line">Best score combination:  </span><br><span class="line"></span><br><span class="line">embeddings: openai:text-embedding-ada-002, chunk size: 400, model: openai:gpt-3.5-turbo, search type: merge</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">embeddings: openai:text-embedding-ada-002, chunk size: 400, model: openai:gpt-3.5-turbo, search type: tfidf</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">Best cost-effective:</span><br><span class="line"></span><br><span class="line">embeddings: hf:shibing624/text2vec-base-chinese, chunk size: 400, model: openai:gpt-3.5-turbo, search type: tfidf</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="https://tea9297.github.io/akasha/2024/12/27/summary/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -526,7 +178,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2024-11-13 16:02:55" itemprop="dateModified" datetime="2024-11-13T16:02:55+08:00">2024-11-13</time>
+                <time title="修改時間：2025-04-21 16:44:24" itemprop="dateModified" datetime="2025-04-21T16:44:24+08:00">2025-04-21</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -534,7 +186,7 @@
               </span>
               <span class="post-meta-item-text">分類於</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/akasha/categories/%E6%91%98%E8%A6%81/" itemprop="url" rel="index"><span itemprop="name">摘要</span></a>
+                  <a href="/akasha/categories/%E5%8A%9F%E8%83%BD/" itemprop="url" rel="index"><span itemprop="name">功能</span></a>
                 </span>
             </span>
 
@@ -549,11 +201,187 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="文件摘要"><a href="#文件摘要" class="headerlink" title="文件摘要"></a>文件摘要</h2><p>若要創建文本文件的摘要（.pdf、.txt.、docx），您可以使用 <em><strong>summary.summarize_file</strong></em> 函數。如範例，以下使用 map_reduce 摘要方法指示語言模型生成大約 500 字的摘要。有兩種摘要類型，<em><strong>map_reduce</strong></em> 和 <em><strong>refine</strong></em>，<em><strong>map_reduce</strong></em> 將對每個文本段落進行摘要，然後使用所有摘要的文本段落生成最終摘要；<em><strong>refine</strong></em> 將逐個摘要每個文本段落，並使用前一個摘要作為摘要下一段的提示，以獲得更高水平的摘要一致性。</p>
-<h3 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import akasha</span><br><span class="line">sum = akasha.Summary( chunk_size=1000, chunk_overlap=100)</span><br><span class="line">sum.summarize_file(file_path=&quot;doc/mic/5軸工具機因應市場訴求改變的發展態勢.pdf&quot;,summary_type=&quot;map_reduce&quot;, summary_len=500\</span><br><span class="line">, chunk_overlap=40)</span><br></pre></td></tr></table></figure>
+          <h2 id="summary"><a href="#summary" class="headerlink" title="summary"></a>summary</h2><p><code>summary</code> 是一個用於總結文件內容的class，支援多種摘要方法（如 <code>map_reduce</code> 和 <code>refine</code>），可以處理多種格式的文件（如 <code>.txt</code>, <code>.docx</code>, <code>.pdf</code>, <code>.md</code>, <code>.csv</code>, <code>.pptx</code>），並將內容分塊後進行摘要，最終合併成一個完整的摘要。</p>
+<h3 id="summary-功能"><a href="#summary-功能" class="headerlink" title="summary 功能"></a>summary 功能</h3><ol>
+<li><strong>多種摘要方法</strong>：<ul>
+<li><code>map_reduce</code>：將內容分塊後分別摘要，最後合併成完整摘要，速度較快，適合大規模內容。</li>
+<li><code>refine</code>：逐塊摘要並使用前一塊的摘要作為提示，摘要一致性較高，但速度較慢。</li>
+</ul>
+</li>
+<li><strong>支援多種輸入格式</strong>：可處理本地文件、目錄、網址或純文字內容。</li>
+<li><strong>日誌保存</strong>：支持保存執行過程與結果的日誌，便於後續分析。</li>
+</ol>
+<hr>
+<h3 id="summary-範例"><a href="#summary-範例" class="headerlink" title="summary 範例"></a>summary 範例</h3><h4 id="使用-map-reduce-方法進行摘要"><a href="#使用-map-reduce-方法進行摘要" class="headerlink" title="使用 map_reduce 方法進行摘要"></a>使用 <code>map_reduce</code> 方法進行摘要</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> akasha</span><br><span class="line"></span><br><span class="line">summ = akasha.summary(</span><br><span class="line">    model=<span class="string">&quot;openai:gpt-4o&quot;</span>,</span><br><span class="line">    sum_type=<span class="string">&quot;map_reduce&quot;</span>,</span><br><span class="line">    chunk_size=<span class="number">1000</span>,</span><br><span class="line">    sum_len=<span class="number">1000</span>,</span><br><span class="line">    language=<span class="string">&quot;en&quot;</span>,</span><br><span class="line">    keep_logs=<span class="literal">True</span>,</span><br><span class="line">    verbose=<span class="literal">True</span>,</span><br><span class="line">    max_input_tokens=<span class="number">8000</span>,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 總結內容，來源可以是網址、文件或純文字</span></span><br><span class="line">ret = summ(content=[<span class="string">&quot;https://github.com/iii-org/akasha&quot;</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 保存日誌</span></span><br><span class="line">summ.save_logs(<span class="string">&quot;sumlog.json&quot;</span>)</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### Arguments of Summary class ###</span><br><span class="line"> Args:</span><br><span class="line">            **chunk_size (int, optional)**: chunk size of texts from documents. Defaults to 1000.</span><br><span class="line">            **chunk_overlap (int, optional)**: chunk overlap of texts from documents. Defaults to 40.</span><br><span class="line">            **model (str, optional)**: llm model to use. Defaults to &quot;gpt-3.5-turbo&quot;.</span><br><span class="line">            **verbose (bool, optional)**: show log texts or not. Defaults to False.</span><br><span class="line">            **language (str, optional)**: the language of documents and prompt, use to make sure docs won&#x27;t exceed</span><br><span class="line">                max token size of llm input.</span><br><span class="line">            **record_exp (str, optional)**: use aiido to save running params and metrics to the remote mlflow or not if record_exp not empty, and setrecord_exp as experiment name.  default &quot;&quot;.</span><br><span class="line">            **system_prompt (str, optional)**: the system prompt that you assign special instruction to llm model, so will not be used</span><br><span class="line">                in searching relevant documents. Defaults to &quot;&quot;.</span><br><span class="line">            **max_input_tokens(int, optional)**: max token length of llm input. Defaults to 3000.</span><br><span class="line">            **temperature (float, optional)**: temperature of llm model from 0.0 to 1.0 . Defaults to 0.0.</span><br><span class="line">            **auto_translate (bool, optional)**: translate summary into language or not.</span><br><span class="line">                        **max_output_tokens (int, optional)**: max output tokens of llm model. Defaults to 1024.</span><br><span class="line">            **max_input_tokens (int, optional)**: max input tokens of llm model. Defaults to 3000.   </span><br><span class="line">            **env_file (str, optional)**: the path of env file. Defaults to &quot;&quot;.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="使用-refine-方法進行摘要"><a href="#使用-refine-方法進行摘要" class="headerlink" title="使用 refine 方法進行摘要"></a>使用 <code>refine</code> 方法進行摘要</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">summ = akasha.summary(</span><br><span class="line">    model=<span class="string">&quot;openai:gpt-4o&quot;</span>,</span><br><span class="line">    sum_type=<span class="string">&quot;refine&quot;</span>,</span><br><span class="line">    chunk_size=<span class="number">1000</span>,</span><br><span class="line">    sum_len=<span class="number">500</span>,</span><br><span class="line">    language=<span class="string">&quot;zh&quot;</span>,</span><br><span class="line">    keep_logs=<span class="literal">True</span>,</span><br><span class="line">    verbose=<span class="literal">True</span>,</span><br><span class="line">    max_input_tokens=<span class="number">8000</span>,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 總結內容，來源可以是本地文件或目錄</span></span><br><span class="line">ret = summ(content=[<span class="string">&quot;docs/example.txt&quot;</span>, <span class="string">&quot;docs/reports/&quot;</span>])</span><br></pre></td></tr></table></figure>
 
+<hr>
+<h3 id="summary-參數"><a href="#summary-參數" class="headerlink" title="summary 參數"></a>summary 參數</h3><h4 id="初始化參數"><a href="#初始化參數" class="headerlink" title="初始化參數"></a>初始化參數</h4><h5 id="model-str"><a href="#model-str" class="headerlink" title="model: str"></a>model: str</h5><p>使用的語言模型，例如 <code>&quot;openai:gpt-4o&quot;</code> 或 <code>&quot;openai:gpt-3.5-turbo&quot;</code>。</p>
+<h5 id="sum-type-str"><a href="#sum-type-str" class="headerlink" title="sum_type: str"></a>sum_type: str</h5><p>摘要方法，支持：</p>
+<ul>
+<li><code>&quot;map_reduce&quot;</code>：分塊摘要後合併，速度較快。</li>
+<li><code>&quot;refine&quot;</code>：逐塊摘要並使用前一塊的摘要作為提示，摘要一致性較高。</li>
+</ul>
+<h5 id="sum-len-int"><a href="#sum-len-int" class="headerlink" title="sum_len: int"></a>sum_len: int</h5><p>建議的摘要長度（以字數或 token 數計）。</p>
+<h5 id="chunk-size-int"><a href="#chunk-size-int" class="headerlink" title="chunk_size: int"></a>chunk_size: int</h5><p>分塊大小，單位為字數或 token。</p>
+<h5 id="chunk-overlap-int"><a href="#chunk-overlap-int" class="headerlink" title="chunk_overlap: int"></a>chunk_overlap: int</h5><p>分塊重疊大小，單位為字數或 token。</p>
+<h5 id="max-input-tokens-int"><a href="#max-input-tokens-int" class="headerlink" title="max_input_tokens: int"></a>max_input_tokens: int</h5><p>單次輸入模型的最大 token 數。</p>
+<h5 id="max-output-tokens-int"><a href="#max-output-tokens-int" class="headerlink" title="max_output_tokens: int"></a>max_output_tokens: int</h5><p>模型輸出的最大 token 數。</p>
+<h5 id="language-str"><a href="#language-str" class="headerlink" title="language: str"></a>language: str</h5><p>內容的語言，支持 <code>&quot;en&quot;</code>（英文）和 <code>&quot;zh&quot;</code>（中文）。</p>
+<h5 id="keep-logs-bool"><a href="#keep-logs-bool" class="headerlink" title="keep_logs: bool"></a>keep_logs: bool</h5><p>是否保存執行過程與結果的日誌。</p>
+<h5 id="verbose-bool"><a href="#verbose-bool" class="headerlink" title="verbose: bool"></a>verbose: bool</h5><p>是否顯示詳細的執行過程。</p>
+<h5 id="temperature-float"><a href="#temperature-float" class="headerlink" title="temperature: float"></a>temperature: float</h5><p>語言模型的隨機性參數，範圍為 0.0 到 1.0。</p>
+<h5 id="system-prompt-str"><a href="#system-prompt-str" class="headerlink" title="system_prompt: str"></a>system_prompt: str</h5><p>指示語言模型的輸出格式需求。</p>
+<hr>
+<h3 id="call-參數"><a href="#call-參數" class="headerlink" title="call 參數"></a><strong>call</strong> 參數</h3><h5 id="content-Union-str-list-Path-Document"><a href="#content-Union-str-list-Path-Document" class="headerlink" title="content: Union[str, list, Path, Document]"></a>content: Union[str, list, Path, Document]</h5><p>需要總結的內容，可以是：</p>
+<ul>
+<li>單個或多個文件路徑（如 <code>.txt</code>, <code>.docx</code>, <code>.pdf</code>）。</li>
+<li>單個或多個網址。</li>
+<li>單個或多個純文字內容。</li>
+</ul>
+<h5 id="sum-type-str-1"><a href="#sum-type-str-1" class="headerlink" title="sum_type: str"></a>sum_type: str</h5><p>摘要方法，支持 <code>&quot;map_reduce&quot;</code> 或 <code>&quot;refine&quot;</code>。</p>
+<h5 id="sum-len-int-1"><a href="#sum-len-int-1" class="headerlink" title="sum_len: int"></a>sum_len: int</h5><p>建議的摘要長度。</p>
+<h5 id="chunk-size-int-1"><a href="#chunk-size-int-1" class="headerlink" title="chunk_size: int"></a>chunk_size: int</h5><p>分塊大小。</p>
+<h5 id="chunk-overlap-int-1"><a href="#chunk-overlap-int-1" class="headerlink" title="chunk_overlap: int"></a>chunk_overlap: int</h5><p>分塊重疊大小。</p>
+<h5 id="max-input-tokens-int-1"><a href="#max-input-tokens-int-1" class="headerlink" title="max_input_tokens: int"></a>max_input_tokens: int</h5><p>單次輸入模型的最大 token 數。</p>
+<h5 id="max-output-tokens-int-1"><a href="#max-output-tokens-int-1" class="headerlink" title="max_output_tokens: int"></a>max_output_tokens: int</h5><p>模型輸出的最大 token 數。</p>
+<h5 id="temperature-float-1"><a href="#temperature-float-1" class="headerlink" title="temperature: float"></a>temperature: float</h5><p>語言模型的隨機性參數。</p>
+<hr>
+<h3 id="日誌與結果"><a href="#日誌與結果" class="headerlink" title="日誌與結果"></a>日誌與結果</h3><ul>
+<li>總結過程與結果會保存到指定的日誌文件中。</li>
+<li>日誌包括摘要的詳細過程、分塊信息、模型輸入輸出 token 數等。</li>
+</ul>
+<hr>
+<h3 id="相關連結"><a href="#相關連結" class="headerlink" title="相關連結"></a>相關連結</h3><ul>
+<li><a href="2024/12/26/%E6%96%87%E4%BB%B6%E6%90%9C%E5%B0%8B/">文件搜尋</a></li>
+<li><a href="2024/12/30/%E8%A8%AD%E5%AE%9A%E8%AA%9E%E8%A8%80%E6%A8%A1%E5%9E%8B/">設定語言模型</a></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://tea9297.github.io/akasha/2024/12/27/websearch/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/akasha/images/avatar.gif">
+      <meta itemprop="name" content="Chih Chuan Chang<ccchang@iii.org.tw>">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="akasha 0.9 使用手冊">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/akasha/2024/12/27/websearch/" class="post-title-link" itemprop="url">websearch</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2024-12-27 22:59:59" itemprop="dateCreated datePublished" datetime="2024-12-27T22:59:59+08:00">2024-12-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2025-04-21 16:50:07" itemprop="dateModified" datetime="2025-04-21T16:50:07+08:00">2025-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/akasha/categories/%E5%8A%9F%E8%83%BD/" itemprop="url" rel="index"><span itemprop="name">功能</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="websearch"><a href="#websearch" class="headerlink" title="websearch"></a>websearch</h2><p><code>websearch</code> 是一個結合網頁搜尋與語言模型回答的工具。它會根據使用者的問題在網路上搜尋相關資訊，並使用語言模型整合搜尋結果來回答問題。<code>websearch</code> 支援多種搜尋引擎與語言，並提供詳細的日誌記錄功能。 </p>
+<p><em><strong>除了wiki，其他搜尋方法皆需要輸入搜尋引擎的API_KEY</strong></em></p>
+<ul>
+<li>SERPER: </li>
+<li>BRAVE:</li>
+<li>TAVILY:</li>
+</ul>
+<h3 id="websearch-功能"><a href="#websearch-功能" class="headerlink" title="websearch 功能"></a>websearch 功能</h3><ol>
+<li><strong>網頁搜尋</strong>：支援多種搜尋引擎，包括 <code>wiki</code>、<code>serper</code>、<code>tavily</code> 和 <code>brave</code>。</li>
+<li><strong>日誌保存</strong>：支持保存執行過程與結果的日誌，便於後續分析。</li>
+<li><strong>流式輸出</strong>：支援流式輸出回答，適合需要即時回應的場景。</li>
+</ol>
+<hr>
+<h3 id="websearch-範例"><a href="#websearch-範例" class="headerlink" title="websearch 範例"></a>websearch 範例</h3><h4 id="使用-serper-搜尋引擎進行搜尋"><a href="#使用-serper-搜尋引擎進行搜尋" class="headerlink" title="使用 serper 搜尋引擎進行搜尋"></a>使用 <code>serper</code> 搜尋引擎進行搜尋</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> akasha</span><br><span class="line"></span><br><span class="line">wb = akasha.websearch(</span><br><span class="line">    model=<span class="string">&quot;openai:gpt-4o&quot;</span>,</span><br><span class="line">    language=<span class="string">&quot;ch&quot;</span>,</span><br><span class="line">    search_engine=<span class="string">&quot;serper&quot;</span>,</span><br><span class="line">    search_num=<span class="number">5</span>,</span><br><span class="line">    verbose=<span class="literal">True</span>,</span><br><span class="line">    keep_logs=<span class="literal">True</span>,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用搜尋引擎回答問題</span></span><br><span class="line">res = wb(<span class="string">&quot;工業4.0是什麼?&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 保存日誌</span></span><br><span class="line">wb.save_logs(<span class="string">&quot;wb.json&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="使用流式輸出回答"><a href="#使用流式輸出回答" class="headerlink" title="使用流式輸出回答"></a>使用流式輸出回答</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 啟用流式輸出</span></span><br><span class="line">st = wb(<span class="string">&quot;工業4.0是什麼?&quot;</span>, stream=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 逐步輸出回答</span></span><br><span class="line"><span class="keyword">for</span> s <span class="keyword">in</span> st:</span><br><span class="line">    <span class="built_in">print</span>(s)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="websearch-參數"><a href="#websearch-參數" class="headerlink" title="websearch 參數"></a>websearch 參數</h3><h4 id="初始化參數"><a href="#初始化參數" class="headerlink" title="初始化參數"></a>初始化參數</h4><h5 id="model-str"><a href="#model-str" class="headerlink" title="model: str"></a>model: str</h5><p>使用的語言模型，例如 <code>&quot;openai:gpt-4o&quot;</code> 或 <code>&quot;openai:gpt-3.5-turbo&quot;</code>。</p>
+<h5 id="language-str"><a href="#language-str" class="headerlink" title="language: str"></a>language: str</h5><p>搜尋語言與地區，支持 <code>&quot;en&quot;</code>（英文）或 <code>&quot;ch&quot;</code>（中文）。</p>
+<h5 id="search-engine-str"><a href="#search-engine-str" class="headerlink" title="search_engine: str"></a>search_engine: str</h5><p>使用的搜尋引擎，支持：</p>
+<ul>
+<li><code>&quot;wiki&quot;</code>：維基百科搜尋。</li>
+<li><code>&quot;serper&quot;</code>：Google 搜尋 API（需申請 API 金鑰）。</li>
+<li><code>&quot;tavily&quot;</code>：Tavily 搜尋 API（需申請 API 金鑰）。</li>
+<li><code>&quot;brave&quot;</code>：Brave 搜尋 API（需申請 API 金鑰）。</li>
+</ul>
+<h5 id="search-num-int"><a href="#search-num-int" class="headerlink" title="search_num: int"></a>search_num: int</h5><p>搜尋結果的數量。</p>
+<h5 id="max-input-tokens-int"><a href="#max-input-tokens-int" class="headerlink" title="max_input_tokens: int"></a>max_input_tokens: int</h5><p>單次輸入模型的最大 token 數。</p>
+<h5 id="max-output-tokens-int"><a href="#max-output-tokens-int" class="headerlink" title="max_output_tokens: int"></a>max_output_tokens: int</h5><p>模型輸出的最大 token 數。</p>
+<h5 id="temperature-float"><a href="#temperature-float" class="headerlink" title="temperature: float"></a>temperature: float</h5><p>語言模型的隨機性參數，範圍為 0.0 到 1.0。</p>
+<h5 id="system-prompt-str"><a href="#system-prompt-str" class="headerlink" title="system_prompt: str"></a>system_prompt: str</h5><p>指示語言模型的輸出格式需求。</p>
+<h5 id="keep-logs-bool"><a href="#keep-logs-bool" class="headerlink" title="keep_logs: bool"></a>keep_logs: bool</h5><p>是否保存執行過程與結果的日誌。</p>
+<h5 id="verbose-bool"><a href="#verbose-bool" class="headerlink" title="verbose: bool"></a>verbose: bool</h5><p>是否顯示詳細的執行過程。</p>
+<h5 id="stream-bool"><a href="#stream-bool" class="headerlink" title="stream: bool"></a>stream: bool</h5><p>是否啟用流式輸出。</p>
+<h5 id="env-file-str"><a href="#env-file-str" class="headerlink" title="env_file: str"></a>env_file: str</h5><p>指定 <code>.env</code> 環境設定檔的路徑。</p>
+<hr>
+<h3 id="call-參數"><a href="#call-參數" class="headerlink" title="call 參數"></a><strong>call</strong> 參數</h3><h5 id="prompt-str"><a href="#prompt-str" class="headerlink" title="prompt: str"></a>prompt: str</h5><p>使用者的問題。</p>
+<h5 id="stream-bool-1"><a href="#stream-bool-1" class="headerlink" title="stream: bool"></a>stream: bool</h5><p>是否啟用流式輸出。</p>
+<h5 id="search-engine-str-1"><a href="#search-engine-str-1" class="headerlink" title="search_engine: str"></a>search_engine: str</h5><p>指定搜尋引擎，支持 <code>&quot;wiki&quot;</code>、<code>&quot;serper&quot;</code>、<code>&quot;tavily&quot;</code> 和 <code>&quot;brave&quot;</code>。</p>
+<h5 id="search-num-int-1"><a href="#search-num-int-1" class="headerlink" title="search_num: int"></a>search_num: int</h5><p>搜尋結果的數量。</p>
+<h5 id="language-str-1"><a href="#language-str-1" class="headerlink" title="language: str"></a>language: str</h5><p>搜尋語言與地區，支持 <code>&quot;en&quot;</code> 或 <code>&quot;ch&quot;</code>。</p>
+<hr>
+<h3 id="日誌與結果"><a href="#日誌與結果" class="headerlink" title="日誌與結果"></a>日誌與結果</h3><ul>
+<li>搜尋過程與結果會保存到指定的日誌文件中。</li>
+<li>日誌包括搜尋引擎、搜尋結果數量、語言模型的輸入輸出 token 數等。</li>
+</ul>
+<hr>
+<h3 id="相關連結"><a href="#相關連結" class="headerlink" title="相關連結"></a>相關連結</h3><ul>
+<li><a href="2024/12/26/%E6%96%87%E4%BB%B6%E6%90%9C%E5%B0%8B/">文件搜尋</a></li>
+<li><a href="2024/12/30/%E8%A8%AD%E5%AE%9A%E8%AA%9E%E8%A8%80%E6%A8%A1%E5%9E%8B/">設定語言模型</a></li>
+</ul>
 
       
     </div>
@@ -1191,10 +1019,250 @@
   
   
 
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://tea9297.github.io/akasha/2024/12/26/%E6%B5%81%E8%BC%B8%E5%87%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/akasha/images/avatar.gif">
+      <meta itemprop="name" content="Chih Chuan Chang<ccchang@iii.org.tw>">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="akasha 0.9 使用手冊">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/akasha/2024/12/26/%E6%B5%81%E8%BC%B8%E5%87%BA/" class="post-title-link" itemprop="url">流輸出</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2024-12-26 17:59:59" itemprop="dateCreated datePublished" datetime="2024-12-26T17:59:59+08:00">2024-12-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2024-11-13 11:27:48" itemprop="dateModified" datetime="2024-11-13T11:27:48+08:00">2024-11-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/akasha/categories/%E9%80%B2%E9%9A%8E/" itemprop="url" rel="index"><span itemprop="name">進階</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="call-stream-model"><a href="#call-stream-model" class="headerlink" title="call_stream_model"></a>call_stream_model</h2><p>在輔助函數中，若LLM模型為若為<em><strong>openai</strong></em>, <em><strong>huggingface</strong></em>, <em><strong>remote</strong></em>, <em><strong>gemini</strong></em>, <em><strong>anthropic</strong></em>類模型，可以使用akasha.call_stream_model()來得到流輸出</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> akasha</span><br><span class="line">prompt = <span class="string">&quot;say something.&quot;</span></span><br><span class="line">model_obj = akasha.handle_model(<span class="string">&quot;openai:gpt-3.5-turbo&quot;</span>, <span class="literal">False</span>, <span class="number">0.0</span>)</span><br><span class="line">streaming = akasha.call_stream_model(model_obj, prompt)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> s <span class="keyword">in</span> streaming:</span><br><span class="line">    <span class="built_in">print</span>(s)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Doc-QA-stream"><a href="#Doc-QA-stream" class="headerlink" title="Doc_QA stream"></a>Doc_QA stream</h2><p>Doc_QA class的函式皆可使用參數stream&#x3D;True來得到流輸出</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> akasha</span><br><span class="line"></span><br><span class="line">ak = akasha.Doc_QA(stream=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">streaming = ak.get_response(<span class="string">&quot;docs/mic&quot;</span>, <span class="string">&quot;say something&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> s <span class="keyword">in</span> streaming:</span><br><span class="line">    <span class="built_in">print</span>(s)</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="Stream-Output"><a href="#Stream-Output" class="headerlink" title="Stream Output"></a>Stream Output</h2><p>要在網頁上或API中使用流輸出(及時一個字一個字輸出語言模型回答)時，若為<em><strong>openai</strong></em>, <em><strong>huggingface</strong></em>, <em><strong>remote</strong></em>, <em><strong>gemini</strong></em>, <em><strong>anthropic</strong></em> 類模型，可以使用model_obj.stream(prompt)，以下為streamlit write_stream在網頁上即時輸出回答為範例</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> streamlit <span class="keyword">as</span> st</span><br><span class="line"><span class="keyword">import</span> akasha</span><br><span class="line"><span class="keyword">import</span> gc, torch</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="string">&quot;pre&quot;</span> <span class="keyword">not</span> <span class="keyword">in</span> st.session_state:</span><br><span class="line">    st.session_state.pre = <span class="string">&quot;&quot;</span></span><br><span class="line"><span class="keyword">if</span> <span class="string">&quot;model_obj&quot;</span> <span class="keyword">not</span> <span class="keyword">in</span> st.session_state:</span><br><span class="line">    st.session_state.model_obj = <span class="literal">None</span></span><br><span class="line">    </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">clean</span>():</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        gc.collect()</span><br><span class="line">        torch.cuda.ipc_collect()</span><br><span class="line">        torch.cuda.empty_cache()</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">stream_response</span>(<span class="params">prompt:<span class="built_in">str</span>, model_name:<span class="built_in">str</span>=<span class="string">&quot;openai:gpt-3.5-turbo&quot;</span></span>):</span><br><span class="line">    <span class="comment"># Mistral-7B-Instruct-v0.3   Llama3-8B-Chinese-Chat</span></span><br><span class="line">    streaming = akasha.call_stream_model(st.session_state.model_obj, prompt)</span><br><span class="line">    <span class="keyword">yield</span> <span class="keyword">from</span> streaming</span><br><span class="line"></span><br><span class="line">model = st.selectbox(<span class="string">&quot;select model&quot;</span>, [<span class="string">&quot;openai:gpt-3.5-turbo&quot;</span>,<span class="string">&quot;hf:model/Mistral-7B-Instruct-v0.3&quot;</span>])</span><br><span class="line">prompt = st.chat_input(<span class="string">&quot;Say something&quot;</span>)</span><br><span class="line"><span class="keyword">if</span> st.session_state.pre != model:</span><br><span class="line">    st.session_state.model_obj = <span class="literal">None</span></span><br><span class="line">    clean()</span><br><span class="line">    st.session_state.model_obj = akasha.helper.handle_model(model, <span class="literal">False</span>, <span class="number">0.0</span>)</span><br><span class="line">    st.session_state.pre = model</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> prompt:</span><br><span class="line">    st.write(<span class="string">&quot;question: &quot;</span> + prompt)</span><br><span class="line">    st.write_stream(stream_response(prompt, model))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<p>使用model_obj &#x3D; akasha.helper.handle_model(model, False, 0.0)建立模型物件，當要使用推論時，使用akasha.call_stream_model(model_obj, prompt)進行推論，可使用yield讓stream_response函式回傳generator, 便可即時輸出回答。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://tea9297.github.io/akasha/2024/12/26/%E6%89%B9%E9%87%8F%E6%8E%A8%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/akasha/images/avatar.gif">
+      <meta itemprop="name" content="Chih Chuan Chang<ccchang@iii.org.tw>">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="akasha 0.9 使用手冊">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/akasha/2024/12/26/%E6%89%B9%E9%87%8F%E6%8E%A8%E7%90%86/" class="post-title-link" itemprop="url">批量推理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2024-12-26 16:59:59" itemprop="dateCreated datePublished" datetime="2024-12-26T16:59:59+08:00">2024-12-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2024-08-30 11:03:53" itemprop="dateModified" datetime="2024-08-30T11:03:53+08:00">2024-08-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/akasha/categories/%E9%80%B2%E9%9A%8E/" itemprop="url" rel="index"><span itemprop="name">進階</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="批量推理"><a href="#批量推理" class="headerlink" title="批量推理"></a>批量推理</h2><p>如果你有大量不需要連貫的推理需求，可以使用<strong>akasha.helper.call_batch_model</strong> 來進行批量推理來提升速度。</p>
+<h3 id="call-batch-model"><a href="#call-batch-model" class="headerlink" title="call_batch_model"></a>call_batch_model</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">def call_batch_model(model: LLM, prompt: List[str], </span><br><span class="line">    system_prompt: Union[List[str], str] = &quot;&quot;) -&gt; List[str]:</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> akasha</span><br><span class="line"></span><br><span class="line">model_obj = akasha.helper.handle_model(<span class="string">&quot;openai:gpt-3.5-turbo&quot;</span>, <span class="literal">False</span>, <span class="number">0.0</span>)</span><br><span class="line"><span class="comment"># this prompt ask LLM to response &#x27;yes&#x27; or &#x27;no&#x27; if the document segment is relevant to the user question or not.</span></span><br><span class="line">SYSTEM_PROMPT = akasha.prompts.default_doc_grader_prompt() </span><br><span class="line">documents = [<span class="string">&quot;Doc1...&quot;</span>, <span class="string">&quot;Doc2...&quot;</span>, <span class="string">&quot;Doc3...&quot;</span>, <span class="string">&quot;Doc4...&quot;</span>]</span><br><span class="line">question = <span class="string">&quot;五軸是什麼?&quot;</span></span><br><span class="line"></span><br><span class="line">prompts = [<span class="string">&quot;document: &quot;</span> + doc +<span class="string">&quot;\n\n&quot;</span> + <span class="string">&quot;User Question: &quot;</span>+ question <span class="keyword">for</span> doc <span class="keyword">in</span> documents]</span><br><span class="line"></span><br><span class="line">response_list = call_batch_model(model_obj, prompt, SYSTEM_PROMPT)</span><br><span class="line"></span><br><span class="line"><span class="comment">## [&quot;yes&quot;, &quot;no&quot;, &quot;yes&quot;, &quot;yes&quot;]</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://tea9297.github.io/akasha/2024/12/26/FAST%20API/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/akasha/images/avatar.gif">
+      <meta itemprop="name" content="Chih Chuan Chang<ccchang@iii.org.tw>">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="akasha 0.9 使用手冊">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/akasha/2024/12/26/FAST%20API/" class="post-title-link" itemprop="url">FAST API</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2024-12-26 15:59:59" itemprop="dateCreated datePublished" datetime="2024-12-26T15:59:59+08:00">2024-12-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2024-11-13 11:15:36" itemprop="dateModified" datetime="2024-11-13T11:15:36+08:00">2024-11-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/akasha/categories/%E9%80%B2%E9%9A%8E/" itemprop="url" rel="index"><span itemprop="name">進階</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="FAST-API"><a href="#FAST-API" class="headerlink" title="FAST API"></a>FAST API</h2><p>akasha 提供get_response, ask_self, ask_whole_file, get_summary的api server</p>
+<h3 id="啟動"><a href="#啟動" class="headerlink" title="啟動"></a>啟動</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">akasha api (–port &#123;port&#125; –host &#123;host&#125; –workers &#123;num_of_workers&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line">import os</span><br><span class="line"></span><br><span class="line">HOST = os.getenv(&quot;API_HOST&quot;, &quot;http://127.0.0.1&quot;)</span><br><span class="line">PORT = os.getenv(&quot;API_PORT&quot;, &quot;8000&quot;)</span><br><span class="line">urls = &#123;</span><br><span class="line">    &quot;summary&quot;: f&quot;&#123;HOST&#125;:&#123;PORT&#125;/get_summary&quot;,</span><br><span class="line">    &quot;qa&quot;: f&quot;&#123;HOST&#125;:&#123;PORT&#125;/get_response&quot;,</span><br><span class="line">    &quot;self&quot;: f&quot;&#123;HOST&#125;:&#123;PORT&#125;/ask_self&quot;,</span><br><span class="line">    &quot;file&quot;: f&quot;&#123;HOST&#125;:&#123;PORT&#125;/ask_whole_file&quot;,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">openai_config = &#123;</span><br><span class="line">    &quot;azure_key&quot;: &#123;your api key&#125;,</span><br><span class="line">    &quot;azure_base&quot;: &#123;your api base&#125;,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">self_data = &#123;</span><br><span class="line">    &quot;prompt&quot;: &quot;太陽電池技術?&quot;,</span><br><span class="line">    &quot;info&quot;: &quot;太陽能電池技術5塊錢&quot;,</span><br><span class="line">    &quot;model&quot;: &quot;openai:gpt-3.5-turbo&quot;,</span><br><span class="line">    &quot;system_prompt&quot;: &quot;&quot;,</span><br><span class="line">    &quot;max_input_tokens&quot;: 3000,</span><br><span class="line">    &quot;temperature&quot;: 0.0,</span><br><span class="line">    &quot;openai_config&quot;: openai_config</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">file_data = &#123;</span><br><span class="line">    &quot;doc_path&quot;: &quot;docs/mic/20230317_5軸工具機因應市場訴求改變的發展態勢.pdf&quot;,</span><br><span class="line">    &quot;prompt&quot;: &quot;五軸是什麼?&quot;,</span><br><span class="line">    &quot;chunk_size&quot;: 1000,</span><br><span class="line">    &quot;model&quot;: &quot;openai:gpt-3.5-turbo&quot;,</span><br><span class="line">    &quot;embedding_model&quot;: &quot;openai:text-embedding-ada-002&quot;,</span><br><span class="line">    &quot;system_prompt&quot;: &quot;&quot;,</span><br><span class="line">    &quot;max_input_tokens&quot;: 3000,</span><br><span class="line">    &quot;temperature&quot;: 0.0,</span><br><span class="line">    &quot;openai_config&quot;: openai_config</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">chat_data = &#123;</span><br><span class="line">    &quot;doc_path&quot;: &quot;docs/pns/&quot;,</span><br><span class="line">    &quot;prompt&quot;: &quot;太陽電池技術?&quot;,</span><br><span class="line">    &quot;chunk_size&quot;: 1000,</span><br><span class="line">    &quot;model&quot;: &quot;openai:gpt-3.5-turbo&quot;,</span><br><span class="line">    &quot;embedding_model&quot;: &quot;openai:text-embedding-ada-002&quot;,</span><br><span class="line">    &quot;search_type&quot;: &#x27;auto&#x27;,</span><br><span class="line">    &quot;system_prompt&quot;: &quot;&quot;,</span><br><span class="line">    &quot;max_input_tokens&quot;: 3000,</span><br><span class="line">    &quot;temperature&quot;: 0.0,</span><br><span class="line">    &quot;openai_config&quot;: openai_config</span><br><span class="line">&#125;</span><br><span class="line">summary_data = &#123;</span><br><span class="line">    &quot;file_path&quot;: &quot;docs/pns/2484.txt&quot;,</span><br><span class="line">    &quot;model&quot;: &quot;openai:gpt-3.5-turbo&quot;,</span><br><span class="line">    &quot;summary_type&quot;: &quot;reduce_map&quot;,</span><br><span class="line">    &quot;summary_len&quot;: 500,</span><br><span class="line">    &quot;system_prompt&quot;: &quot;&quot;,</span><br><span class="line">    &quot;openai_config&quot;: openai_config</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># chat_response = requests.post(urls[&quot;qa&quot;], json=chat_data).json()</span><br><span class="line"># print(chat_response)</span><br><span class="line"></span><br><span class="line"># sum_response = requests.post(</span><br><span class="line">#     urls[&quot;summary&quot;],</span><br><span class="line">#     json=summary_data,</span><br><span class="line"># ).json()</span><br><span class="line"></span><br><span class="line"># print(sum_response)</span><br><span class="line"></span><br><span class="line">self_response = requests.post(urls[&quot;self&quot;], json=self_data).json()</span><br><span class="line">print(self_response)</span><br><span class="line">file_response = requests.post(urls[&quot;file&quot;], json=file_data).json()</span><br><span class="line">print(file_response)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/akasha/"><i class="fa fa-angle-left" aria-label="上一頁"></i></a><a class="page-number" href="/akasha/">1</a><span class="page-number current">2</span><a class="page-number" href="/akasha/page/3/">3</a><a class="page-number" href="/akasha/page/4/">4</a><a class="extend next" rel="next" href="/akasha/page/3/"><i class="fa fa-angle-right" aria-label="下一頁"></i></a>
+    <a class="extend prev" rel="prev" href="/akasha/"><i class="fa fa-angle-left" aria-label="上一頁"></i></a><a class="page-number" href="/akasha/">1</a><span class="page-number current">2</span><a class="page-number" href="/akasha/page/3/">3</a><a class="extend next" rel="next" href="/akasha/page/3/"><i class="fa fa-angle-right" aria-label="下一頁"></i></a>
   </nav>
 
 
@@ -1260,16 +1328,16 @@
       <div class="site-state-item site-state-posts">
           <a href="/akasha/archives/">
         
-          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-count">25</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">分類</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">標籤</span>
       </div>
   </nav>
