@@ -20,23 +20,24 @@
     var CONFIG = {"hostname":"tea9297.github.io","root":"/akasha/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="get_response確認設定中有選擇正確的知識庫後，在system_prompt中填入希望回答的格式，在prompt中填入問題，按下submit便可以執行文檔問答。     可以使用clear 按鈕清空對話欄，也可以使用左側Download Log按鈕下載紀錄    chain_of_thought使用Add Prompt 按鈕增加子問題，便可以使用chain of thought先提問小問題">
+  <meta name="description" content="流式輸出在畫面右邊選取stream，語言模型的回答將會是流式輸出  RAG確認設定中有選擇正確的知識庫後，在system_prompt中填入希望回答的格式，在下方填入問題，便可以執行文檔問答。     可以使用clear 按鈕清空對話欄，也可以使用左側Download Log按鈕下載紀錄     summary選擇summary方法與長度後，上傳單一文件檔便可得到該文檔的摘要。     webse">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ui操作">
 <meta property="og:url" content="https://tea9297.github.io/akasha/2024/12/24/ui%E6%93%8D%E4%BD%9C/index.html">
 <meta property="og:site_name" content="akasha 0.9 使用手冊">
-<meta property="og:description" content="get_response確認設定中有選擇正確的知識庫後，在system_prompt中填入希望回答的格式，在prompt中填入問題，按下submit便可以執行文檔問答。     可以使用clear 按鈕清空對話欄，也可以使用左側Download Log按鈕下載紀錄    chain_of_thought使用Add Prompt 按鈕增加子問題，便可以使用chain of thought先提問小問題">
+<meta property="og:description" content="流式輸出在畫面右邊選取stream，語言模型的回答將會是流式輸出  RAG確認設定中有選擇正確的知識庫後，在system_prompt中填入希望回答的格式，在下方填入問題，便可以執行文檔問答。     可以使用clear 按鈕清空對話欄，也可以使用左側Download Log按鈕下載紀錄     summary選擇summary方法與長度後，上傳單一文件檔便可得到該文檔的摘要。     webse">
 <meta property="og:locale" content="zh_TW">
-<meta property="og:image" content="https://hackmd.io/_uploads/BkmIZ9y5T.png">
-<meta property="og:image" content="https://hackmd.io/_uploads/H1MgEckqT.png">
-<meta property="og:image" content="https://hackmd.io/_uploads/HkEQG5kqa.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/rkDW2RN1ex.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HJB52N5Ayg.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SJ5f34qAyx.png">
 <meta property="og:image" content="https://hackmd.io/_uploads/r15wQ9y96.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/BJEvoCV1xe.png">
 <meta property="article:published_time" content="2024-12-24T14:59:59.000Z">
-<meta property="article:modified_time" content="2024-08-30T03:06:26.209Z">
+<meta property="article:modified_time" content="2025-04-22T09:06:17.755Z">
 <meta property="article:author" content="Chih Chuan Chang&lt;ccchang@iii.org.tw&gt;">
 <meta property="article:tag" content="akasha-UI">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://hackmd.io/_uploads/BkmIZ9y5T.png">
+<meta name="twitter:image" content="https://hackmd.io/_uploads/rkDW2RN1ex.png">
 
 <link rel="canonical" href="https://tea9297.github.io/akasha/2024/12/24/ui%E6%93%8D%E4%BD%9C/">
 
@@ -187,7 +188,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2024-08-30 11:06:26" itemprop="dateModified" datetime="2024-08-30T11:06:26+08:00">2024-08-30</time>
+                <time title="修改時間：2025-04-22 17:06:17" itemprop="dateModified" datetime="2025-04-22T17:06:17+08:00">2025-04-22</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -210,21 +211,25 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="get-response"><a href="#get-response" class="headerlink" title="get_response"></a>get_response</h2><p>確認設定中有選擇正確的知識庫後，在system_prompt中填入希望回答的格式，在prompt中填入問題，按下submit便可以執行文檔問答。<br><img src="https://hackmd.io/_uploads/BkmIZ9y5T.png" alt="ui_5"></p>
+        <h2 id="流式輸出"><a href="#流式輸出" class="headerlink" title="流式輸出"></a>流式輸出</h2><p>在畫面右邊選取stream，語言模型的回答將會是流式輸出</p>
+<p><img src="https://hackmd.io/_uploads/rkDW2RN1ex.png" alt="image"></p>
+<h2 id="RAG"><a href="#RAG" class="headerlink" title="RAG"></a>RAG</h2><p>確認設定中有選擇正確的知識庫後，在system_prompt中填入希望回答的格式，在下方填入問題，便可以執行文檔問答。<br><img src="https://hackmd.io/_uploads/HJB52N5Ayg.png" alt="ui_5"></p>
 </br>
 </br>
 
 
-<p>可以使用<em><strong>clear</strong></em> 按鈕清空對話欄，也可以使用左側<em><strong>Download Log</strong></em>按鈕下載紀錄<br><img src="https://hackmd.io/_uploads/H1MgEckqT.png" alt="image"></p>
-</br>
-</br>
-
-<h2 id="chain-of-thought"><a href="#chain-of-thought" class="headerlink" title="chain_of_thought"></a>chain_of_thought</h2><p>使用<em><strong>Add Prompt</strong></em> 按鈕增加子問題，便可以使用chain of thought先提問小問題並利用小問題的答案回答較為複雜的問題。<br><img src="https://hackmd.io/_uploads/HkEQG5kqa.png" alt="image"></p>
+<p>可以使用<em><strong>clear</strong></em> 按鈕清空對話欄，也可以使用左側<em><strong>Download Log</strong></em>按鈕下載紀錄<br><img src="https://hackmd.io/_uploads/SJ5f34qAyx.png" alt="image"></p>
 </br>
 </br>
 
 
 <h2 id="summary"><a href="#summary" class="headerlink" title="summary"></a>summary</h2><p>選擇summary方法與長度後，上傳單一文件檔便可得到該文檔的摘要。<br><img src="https://hackmd.io/_uploads/r15wQ9y96.png" alt="image"></p>
+</br>
+</br>
+
+
+<h2 id="websearch"><a href="#websearch" class="headerlink" title="websearch"></a>websearch</h2><p>選擇要使用的搜尋引擎與搜尋數量上限後，會根據問題進行網頁搜尋並回答問題</p>
+<p><img src="https://hackmd.io/_uploads/BJEvoCV1xe.png" alt="image"></p>
 
     </div>
 
@@ -305,7 +310,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#get-response"><span class="nav-number">1.</span> <span class="nav-text">get_response</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chain-of-thought"><span class="nav-number">2.</span> <span class="nav-text">chain_of_thought</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#summary"><span class="nav-number">3.</span> <span class="nav-text">summary</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%81%E5%BC%8F%E8%BC%B8%E5%87%BA"><span class="nav-number">1.</span> <span class="nav-text">流式輸出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RAG"><span class="nav-number">2.</span> <span class="nav-text">RAG</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#summary"><span class="nav-number">3.</span> <span class="nav-text">summary</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#websearch"><span class="nav-number">4.</span> <span class="nav-text">websearch</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -319,16 +324,16 @@
       <div class="site-state-item site-state-posts">
           <a href="/akasha/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">21</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">分類</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">標籤</span>
       </div>
   </nav>

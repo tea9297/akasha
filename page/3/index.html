@@ -147,379 +147,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://tea9297.github.io/akasha/2024/12/26/%E8%87%AA%E6%9F%A5%E8%A9%A2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/akasha/images/avatar.gif">
-      <meta itemprop="name" content="Chih Chuan Chang<ccchang@iii.org.tw>">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="akasha 0.9 使用手冊">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/akasha/2024/12/26/%E8%87%AA%E6%9F%A5%E8%A9%A2/" class="post-title-link" itemprop="url">自查詢</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-
-              <time title="創建時間：2024-12-26 13:59:59" itemprop="dateCreated datePublished" datetime="2024-12-26T13:59:59+08:00">2024-12-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2024-12-25 16:38:29" itemprop="dateModified" datetime="2024-12-25T16:38:29+08:00">2024-12-25</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分類於</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/akasha/categories/%E9%80%B2%E9%9A%8E/" itemprop="url" rel="index"><span itemprop="name">進階</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="自查詢-Self-Query"><a href="#自查詢-Self-Query" class="headerlink" title="自查詢(Self Query)"></a>自查詢(Self Query)</h2><p>自查詢是指能夠自我查詢的檢索問題方法。透過結構化、包含metadata的文件集，能將使用者的問題先透過metadata進行篩選，再藉由向量來查詢語意相似的文檔，比起直接做向量查詢能更精確的找到需要的文件。</p>
-<h3 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h3><p>自查詢的流程為</p>
-<h4 id="0-create-metadata"><a href="#0-create-metadata" class="headerlink" title="0. create metadata"></a>0. create metadata</h4><p>添加結構化資料到文件集與向量資料庫中</p>
-<h4 id="1-query-constructor"><a href="#1-query-constructor" class="headerlink" title="1. query constructor"></a>1. query constructor</h4><p>將使用者問題轉換成 query(用來做向量查詢的字串)與filter(用來篩選文件集的metatada keywords)<br>例如，使用者問題為: A公司在2024年對電動車的銷售量為多少?</p>
-<p>透過語言模型 將其轉換為</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;query&quot;</span><span class="punctuation">:</span> <span class="string">&quot;電動車的銷售量&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;filter&quot;</span><span class="punctuation">:</span> <span class="string">&quot;and(eq(\&quot;公司名稱\&quot;, \&quot;A公司\&quot;), eq(\&quot;日期年\&quot;, \&quot;2024\&quot;))&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
-
-
-<h4 id="2-filter-translator"><a href="#2-filter-translator" class="headerlink" title="2. filter translator"></a>2. filter translator</h4><p>將filter處理為程式可執行的dictionary</p>
-<h4 id="3-filter-docs"><a href="#3-filter-docs" class="headerlink" title="3. filter docs"></a>3. filter docs</h4><p>根據filter篩選需要的文件集</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span>&#x27;filter&#x27;<span class="punctuation">:</span> <span class="punctuation">&#123;</span>&#x27;$and&#x27;<span class="punctuation">:</span> <span class="punctuation">[</span><span class="punctuation">&#123;</span>&#x27;拜訪年&#x27;<span class="punctuation">:</span> <span class="punctuation">&#123;</span>&#x27;$eq&#x27;<span class="punctuation">:</span> &#x27;<span class="number">2024</span>&#x27;<span class="punctuation">&#125;</span><span class="punctuation">&#125;</span><span class="punctuation">,</span> <span class="punctuation">&#123;</span>&#x27;公司名稱&#x27;<span class="punctuation">:</span> <span class="punctuation">&#123;</span>&#x27;$eq&#x27;<span class="punctuation">:</span> &#x27;A公司&#x27;<span class="punctuation">&#125;</span><span class="punctuation">&#125;</span><span class="punctuation">]</span><span class="punctuation">&#125;</span><span class="punctuation">&#125;</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-<h4 id="4-similarity-search"><a href="#4-similarity-search" class="headerlink" title="4. similarity search"></a>4. similarity search</h4><p>從篩選出來的文件集做向量相似度搜尋</p>
-</br>
-</br>
-
-<h3 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h3><h4 id="1-create-chromadb-add-metadatas"><a href="#1-create-chromadb-add-metadatas" class="headerlink" title="1. create chromadb &amp; add metadatas"></a>1. create chromadb &amp; add metadatas</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> akasha</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">add_metadata</span>(<span class="params">metadata_list: <span class="built_in">list</span></span>):</span><br><span class="line"></span><br><span class="line">    <span class="keyword">import</span> json</span><br><span class="line">    <span class="keyword">from</span> pathlib <span class="keyword">import</span> Path</span><br><span class="line">    <span class="keyword">for</span> metadata <span class="keyword">in</span> metadata_list:</span><br><span class="line">        file_path = metadata[<span class="string">&#x27;source&#x27;</span>] <span class="comment"># file path</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="keyword">with</span> Path(file_path).<span class="built_in">open</span>(<span class="string">&#x27;r&#x27;</span>, encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> file:</span><br><span class="line">                dictionary = json.load(file)</span><br><span class="line"></span><br><span class="line">            </span><br><span class="line">            metadata[<span class="string">&#x27;課別&#x27;</span>] = dictionary[<span class="string">&#x27;課別&#x27;</span>]</span><br><span class="line">            metadata[<span class="string">&#x27;業務擔當&#x27;</span>] = dictionary[<span class="string">&#x27;業務擔當&#x27;</span>]</span><br><span class="line">            ddate = dictionary[<span class="string">&#x27;拜訪日期&#x27;</span>]</span><br><span class="line">            metadata[<span class="string">&#x27;拜訪年&#x27;</span>] = <span class="built_in">int</span>(ddate.split(<span class="string">&#x27;-&#x27;</span>)[<span class="number">0</span>])</span><br><span class="line">            metadata[<span class="string">&#x27;拜訪月&#x27;</span>] = <span class="built_in">int</span>(ddate.split(<span class="string">&#x27;-&#x27;</span>)[<span class="number">1</span>])</span><br><span class="line">            metadata[<span class="string">&#x27;產品&#x27;</span>] = dictionary[<span class="string">&#x27;產品&#x27;</span>]</span><br><span class="line">            metadata[<span class="string">&#x27;公司名稱&#x27;</span>] = dictionary[<span class="string">&#x27;公司名稱&#x27;</span>]</span><br><span class="line">            metadata[<span class="string">&#x27;大分類&#x27;</span>] = dictionary[<span class="string">&#x27;大分類&#x27;</span>]</span><br><span class="line">            metadata[<span class="string">&#x27;中分類&#x27;</span>] = dictionary[<span class="string">&#x27;中分類&#x27;</span>]</span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&quot;JSONDecodeError: <span class="subst">&#123;e&#125;</span>&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> metadata_list</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">### set parameter ###</span></span><br><span class="line"><span class="built_in">dir</span> = <span class="string">&quot;docs/pns_query&quot;</span></span><br><span class="line">embed_name = <span class="string">&quot;openai:text-embedding-ada-002&quot;</span></span><br><span class="line">chunk_size = <span class="number">99999</span>  <span class="comment"># make sure 1 file 1 chunk</span></span><br><span class="line">emb_obj = akasha.handle_embeddings(<span class="string">&quot;openai:text-embedding-ada-002&quot;</span>)</span><br><span class="line"><span class="comment">####################</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># create chromadb from docs</span></span><br><span class="line">db, _ = akasha.db.processMultiDB(<span class="built_in">dir</span>, <span class="literal">False</span>, emb_obj, chunk_size,</span><br><span class="line">                                 <span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">### add metadata to chromadb ###</span></span><br><span class="line">metadata_list = akasha.db.get_db_metadata(<span class="built_in">dir</span>, embed_name, chunk_size) <span class="comment"># get original metada from chromadb, list of dictionary</span></span><br><span class="line">metadata_list = add_metadata(metadata_list)  <span class="comment"># update/add metadata, you can build your own function to update metadata</span></span><br><span class="line">akasha.db.update_db_metadata(metadata_list, <span class="built_in">dir</span>, embed_name, chunk_size)  <span class="comment"># update and save new metadatas to chromadb</span></span><br><span class="line"><span class="built_in">print</span>(akasha.db.get_db_metadata(<span class="built_in">dir</span>, embed_name, chunk_size)[<span class="number">0</span>])</span><br></pre></td></tr></table></figure>
-
-</br>
-</br>
-
-
-<h4 id="2-use-self-query-to-filter-docs-and-use-query-for-similarity-search"><a href="#2-use-self-query-to-filter-docs-and-use-query-for-similarity-search" class="headerlink" title="2. use self-query to filter docs and use query for similarity search"></a>2. use self-query to filter docs and use query for similarity search</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">from</span> akasha.self_query <span class="keyword">import</span> query_filter</span><br><span class="line"><span class="comment">### set parameter ###</span></span><br><span class="line"></span><br><span class="line">db, _ = akasha.db.processMultiDB(<span class="built_in">dir</span>, <span class="literal">False</span>, emb_obj, chunk_size,</span><br><span class="line">                                 <span class="literal">True</span>)</span><br><span class="line">prompt = <span class="string">&quot;A公司在2024年對電動車的銷售量為多少?&quot;</span> </span><br><span class="line">search_type = <span class="string">&quot;bm25&quot;</span></span><br><span class="line">model_obj = akasha.helper.handle_model(<span class="string">&quot;openai:gpt-4o&quot;</span>, <span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">## each metadata attribute should include name, description and type(integer, float, string) ##</span></span><br><span class="line">metadata_field_info = [</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&quot;name&quot;</span>: <span class="string">&quot;拜訪年&quot;</span>,</span><br><span class="line">        <span class="string">&quot;description&quot;</span>: <span class="string">&quot;此訪談紀錄的拜訪年份&quot;</span>,</span><br><span class="line">        <span class="string">&quot;type&quot;</span>: <span class="string">&quot;integer&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&quot;name&quot;</span>: <span class="string">&quot;拜訪月&quot;</span>,</span><br><span class="line">        <span class="string">&quot;description&quot;</span>: <span class="string">&quot;此訪談紀錄的拜訪月份&quot;</span>,</span><br><span class="line">        <span class="string">&quot;type&quot;</span>: <span class="string">&quot;integer&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&quot;name&quot;</span>: <span class="string">&quot;業務擔當&quot;</span>,</span><br><span class="line">        <span class="string">&quot;description&quot;</span>: <span class="string">&quot;業務的名稱&quot;</span>,</span><br><span class="line">        <span class="string">&quot;type&quot;</span>: <span class="string">&quot;string&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&quot;name&quot;</span>: <span class="string">&quot;中分類&quot;</span>,</span><br><span class="line">        <span class="string">&quot;description&quot;</span>: <span class="string">&quot;訪談產品的中等分類&quot;</span>,</span><br><span class="line">        <span class="string">&quot;type&quot;</span>: <span class="string">&quot;string&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&quot;name&quot;</span>: <span class="string">&quot;公司名稱&quot;</span>,</span><br><span class="line">        <span class="string">&quot;description&quot;</span>: <span class="string">&quot;訪談對象的公司名稱&quot;</span>,</span><br><span class="line">        <span class="string">&quot;type&quot;</span>: <span class="string">&quot;string&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&quot;name&quot;</span>: <span class="string">&quot;大分類&quot;</span>,</span><br><span class="line">        <span class="string">&quot;description&quot;</span>: <span class="string">&quot;訪談產品的大分類&quot;</span>,</span><br><span class="line">        <span class="string">&quot;type&quot;</span>: <span class="string">&quot;string&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&quot;name&quot;</span>: <span class="string">&quot;產品&quot;</span>,</span><br><span class="line">        <span class="string">&quot;description&quot;</span>: <span class="string">&quot;訪談的產品名稱/型號&quot;</span>,</span><br><span class="line">        <span class="string">&quot;type&quot;</span>: <span class="string">&quot;string&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&quot;name&quot;</span>: <span class="string">&quot;課別&quot;</span>,</span><br><span class="line">        <span class="string">&quot;description&quot;</span>: <span class="string">&quot;公司部門的課別名稱或代號&quot;</span>,</span><br><span class="line">        <span class="string">&quot;type&quot;</span>: <span class="string">&quot;string&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">document_content_description = <span class="string">&quot;業務與客戶的訪談紀錄&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">####################</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">### use self-query to filter docs</span></span><br><span class="line">new_dbs, query, matched_fields = query_filter(</span><br><span class="line">            prompt, model_obj, db, metadata_field_info,</span><br><span class="line">            document_content_description)</span><br><span class="line"></span><br><span class="line"><span class="comment">### option1   use svm similarity search to sort docs from filtered docs</span></span><br><span class="line">retriver = akasha.search.get_retrivers(new_dbs, emb_obj, <span class="number">0.0</span>,</span><br><span class="line">                                               search_type)[<span class="number">0</span>]</span><br><span class="line">retri_docs, retri_scores = retriver._gs(query)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">### option2 use new_dbs(filtered docs) to run other akasha functions</span></span><br><span class="line">ak = akasha.Doc_QA(embeddings=emb_obj, model=model_obj)</span><br><span class="line">ak.get_response(doc_path=new_dbs,prompt=prompt)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-</br>
-</br>
-
-
-<h3 id="自訂parser函式"><a href="#自訂parser函式" class="headerlink" title="自訂parser函式"></a>自訂parser函式</h3><p>若您使用的語言模型回答無法使用預設的parser找出query與filter，可以自訂一個parser函式，輸入為語言模型的回答(string)，輸出為[query(string), filter(dictionary)]。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">just_an_example</span>(<span class="params">input_text: <span class="built_in">str</span></span>):</span><br><span class="line">    <span class="comment"># input_text :</span></span><br><span class="line">    <span class="comment">#```json</span></span><br><span class="line">    <span class="comment">#&#123;</span></span><br><span class="line">    <span class="comment">#   &quot;query&quot;: &quot;產品疑慮&quot;,</span></span><br><span class="line">    <span class="comment">#   &quot;filter&quot;: &quot;and(eq(\&quot;公司名稱\&quot;, \&quot;a公司\&quot;), eq(\&quot;拜訪年\&quot;, \&quot;2024\&quot;))&quot;</span></span><br><span class="line">    <span class="comment">#&#125;</span></span><br><span class="line">    <span class="comment">#```</span></span><br><span class="line"></span><br><span class="line">    jstr = <span class="string">&#x27;&#123;&quot;$and&quot;: [&#123;&quot;公司名稱&quot;: &#123;&quot;$eq&quot;: &quot;a公司&quot;&#125;&#125;, &#123;&quot;拜訪年&quot;: &#123;&quot;$eq&quot;: &quot;2024&quot;&#125;&#125;]&#125;&#x27;</span></span><br><span class="line">    dic = json.loads(jstr)</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;產品疑慮&quot;</span>, dic</span><br><span class="line"></span><br><span class="line"><span class="comment">### use self-query to filter docs</span></span><br><span class="line">new_dbs, query, matched_fields = query_filter(</span><br><span class="line">            prompt, model_obj, db, metadata_field_info,</span><br><span class="line">            document_content_description, just_an_example)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-</br>
-</br>
-
-
-<h2 id="loose-filter"><a href="#loose-filter" class="headerlink" title="loose filter"></a>loose filter</h2><p>使用參數 <em><strong>loose_filter&#x3D;True</strong></em>會將filter中的$and替換成$or，只要文件有符合任意attribute便會選取</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">### use self-query to filter docs</span></span><br><span class="line"><span class="comment">## filter become &#x27;&#123;&quot;$or&quot;: [&#123;&quot;公司名稱&quot;: &#123;&quot;$eq&quot;: &quot;a公司&quot;&#125;&#125;, &#123;&quot;拜訪年&quot;: &#123;&quot;$eq&quot;: &quot;2024&quot;&#125;&#125;]&#125;&#x27;</span></span><br><span class="line">new_dbs, query, matched_fields = query_filter(</span><br><span class="line">            prompt, model_obj, db, metadata_field_info,</span><br><span class="line">            document_content_description, loose_filter = <span class="literal">True</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://tea9297.github.io/akasha/2024/12/25/JSON%E6%A0%BC%E5%BC%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/akasha/images/avatar.gif">
-      <meta itemprop="name" content="Chih Chuan Chang<ccchang@iii.org.tw>">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="akasha 0.9 使用手冊">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/akasha/2024/12/25/JSON%E6%A0%BC%E5%BC%8F/" class="post-title-link" itemprop="url">JSON格式</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-
-              <time title="創建時間：2024-12-25 23:59:59" itemprop="dateCreated datePublished" datetime="2024-12-25T23:59:59+08:00">2024-12-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2024-11-13 11:15:32" itemprop="dateModified" datetime="2024-11-13T11:15:32+08:00">2024-11-13</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分類於</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/akasha/categories/%E6%8C%87%E5%AE%9A%E8%BC%B8%E5%87%BA%E6%A0%BC%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">指定輸出格式</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="JSON-Formatter"><a href="#JSON-Formatter" class="headerlink" title="JSON Formatter"></a>JSON Formatter</h2><p>如果你想讓語言模型的回答為JSON格式，可以使用JSONformatter</p>
-<h2 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h2><p>如以下範例，首先先定義你想要回傳的key值的名稱、說明和型別，並利用<em><strong>JSON_formatter</strong></em>轉換成json格式的prompt，並在問問題時把JSON_prompt丟入system_prompt中。</p>
-<p>如formatter2和formatter3，你也可以直接使用JSON_formatter_list或JSON_formatter_dict將list或dictionary轉換成json格式的prompt。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">import akasha.prompts as prompts</span><br><span class="line">import akasha</span><br><span class="line">import akasha.eval as eval</span><br><span class="line"></span><br><span class="line">formatter = [</span><br><span class="line">        prompts.OutputSchema(name=&quot;學歷&quot;, description=&quot;受試者的就讀大學&quot;, type=&quot;str&quot;),</span><br><span class="line">        prompts.OutputSchema(name=&quot;經驗&quot;, description=&quot;受試者的工作經驗&quot;, type=&quot;str&quot;),</span><br><span class="line">        prompts.OutputSchema(name=&quot;專長&quot;, description=&quot;受試者的專長能力&quot;, type=&quot;list&quot;),</span><br><span class="line">        prompts.OutputSchema(name=&quot;年資&quot;, description=&quot;受試者的總工作年數&quot;, type=&quot;int&quot;)</span><br><span class="line">    ]</span><br><span class="line"></span><br><span class="line">formatter2 = prompts.JSON_formatter_list(names=[&quot;學歷&quot;,&quot;經驗&quot;,&quot;專長&quot;,&quot;年資&quot;], types=[&quot;str&quot;,&quot;str&quot;,&quot;list&quot;,&quot;int&quot;],\</span><br><span class="line">        descriptions=[&quot;受試者的就讀大學&quot;,&quot;受試者的工作經驗&quot;,&quot;受試者的專長能力&quot;,&quot;受試者的總工作年數&quot;])</span><br><span class="line"></span><br><span class="line">formatter3 = prompts.JSON_formatter_dict([&#123; &quot;name&quot;: &quot;學歷&quot;, &quot;description&quot;: &quot;受試者的就讀大學&quot;, &quot;type&quot;: &quot;str&quot; &#125;,\</span><br><span class="line">        &#123; &quot;name&quot;: &quot;經驗&quot;, &quot;description&quot;: &quot;受試者的工作經驗&quot;, &quot;type&quot;: &quot;str&quot; &#125;,\</span><br><span class="line">            &#123; &quot;name&quot;: &quot;專長&quot;, &quot;description&quot;: &quot;受試者的專長能力&quot;, &quot;type&quot;: &quot;list&quot; &#125;,\</span><br><span class="line">                &#123; &quot;name&quot;: &quot;年資&quot;, &quot;description&quot;: &quot;受試者的總工作年數&quot;, &quot;type&quot;: &quot;int&quot; &#125;])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">JSON_prompt = prompts.JSON_formatter(formatter)</span><br><span class="line"># JSON_prompt = prompts.JSON_formatter(formatter2)</span><br><span class="line"># JSON_prompt = prompts.JSON_formatter(formatter3)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ak = akasha.Doc_QA()</span><br><span class="line"></span><br><span class="line">response = ak.ask_whole_file(file_path=&quot;docs/resume_pool/A.docx&quot;,</span><br><span class="line">system_prompt=JSON_prompt, prompt=f&#x27;&#x27;&#x27;以上是受試者的履歷，請回答該受試者的學歷、經驗、專長、年資&#x27;&#x27;&#x27;)</span><br><span class="line"></span><br><span class="line">parse_json = akasha.helper.extract_json(resposne)</span><br><span class="line"></span><br><span class="line">print(parse_json)</span><br><span class="line">print(type(parse_json))</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#x27;學歷&#x27;: &#x27;國立臺北科技大學電資學士班 四技&#x27;, &#x27;經驗&#x27;: &#x27;總年資0-1年年工作經歷&#x27;, &#x27;專長&#x27;: [&#x27;計算機網路(協定)&#x27;, &#x27;資料庫系統&#x27;, &#x27;物件導向程式設計&#x27;, &#x27;C語言&#x27;, &#x27;python&#x27;, &#x27;C++&#x27;, &#x27;Gitlab&#x27;, &#x27;Jenkins&#x27;, &#x27;Git&#x27;, &#x27;linux&#x27;, &#x27;Google表單&#x27;], &#x27;年資&#x27;: 1&#125; </span><br><span class="line"></span><br><span class="line">&lt;class &#x27;dict&#x27;&gt;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://tea9297.github.io/akasha/2024/12/25/XML%E6%A0%BC%E5%BC%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/akasha/images/avatar.gif">
-      <meta itemprop="name" content="Chih Chuan Chang<ccchang@iii.org.tw>">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="akasha 0.9 使用手冊">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/akasha/2024/12/25/XML%E6%A0%BC%E5%BC%8F/" class="post-title-link" itemprop="url">XML格式</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-
-              <time title="創建時間：2024-12-25 22:59:59" itemprop="dateCreated datePublished" datetime="2024-12-25T22:59:59+08:00">2024-12-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2024-11-13 11:16:33" itemprop="dateModified" datetime="2024-11-13T11:16:33+08:00">2024-11-13</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分類於</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/akasha/categories/%E6%8C%87%E5%AE%9A%E8%BC%B8%E5%87%BA%E6%A0%BC%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">指定輸出格式</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="XML-Formatter"><a href="#XML-Formatter" class="headerlink" title="XML Formatter"></a>XML Formatter</h2><p>如果你想讓語言模型的回答為XML格式，可以使用XMLformatter</p>
-<h2 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h2><p>如以下範例，首先先定義你想要回傳的key值的名稱、說明和型別，並利用<em><strong>XML_formatter</strong></em>轉換成xml格式的prompt，並在問問題時把xml_prompt丟入system_prompt中。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">import akasha.prompts as prompts</span><br><span class="line">import akasha</span><br><span class="line">import akasha.eval as eval</span><br><span class="line"></span><br><span class="line">formatter = [</span><br><span class="line">        prompts.OutputSchema(name=&quot;學歷&quot;, description=&quot;受試者的就讀大學&quot;, type=&quot;str&quot;),</span><br><span class="line">        prompts.OutputSchema(name=&quot;經驗&quot;, description=&quot;受試者的工作經驗&quot;, type=&quot;str&quot;),</span><br><span class="line">        prompts.OutputSchema(name=&quot;專長&quot;, description=&quot;受試者的專長能力&quot;, type=&quot;list&quot;),</span><br><span class="line">        prompts.OutputSchema(name=&quot;年資&quot;, description=&quot;受試者的總工作年數&quot;, type=&quot;int&quot;)</span><br><span class="line">    ]</span><br><span class="line">xml_prompt = prompts.XML_formatter(formatter)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ak = akasha.Doc_QA()</span><br><span class="line"></span><br><span class="line">response = ak.ask_whole_file(file_path=&quot;docs/resume_pool/A.docx&quot;,</span><br><span class="line">system_prompt=xml_prompt, prompt=f&#x27;&#x27;&#x27;以上是受試者的履歷，請回答該受試者的學歷、經驗、專長、年資&#x27;&#x27;&#x27;)</span><br><span class="line"></span><br><span class="line">print(response)</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;resume&gt;</span><br><span class="line">    &lt;學歷&gt;國立臺北科技大學電資學士班 四技 就學中&lt;/學歷&gt;</span><br><span class="line">    &lt;經驗&gt;英文短期文理補習班補習班導師／管理人員&lt;/經驗&gt;</span><br><span class="line">    &lt;專長&gt;</span><br><span class="line">        &lt;能力&gt;語言能力&lt;/能力&gt;</span><br><span class="line">        &lt;英文&gt;聽-中等, 說-中等, 讀-中等, 寫-中等&lt;/英文&gt;</span><br><span class="line">        &lt;證照&gt;TOEIC &lt;/證照&gt;</span><br><span class="line">    &lt;/專長&gt;</span><br><span class="line">    &lt;年資&gt;0-1&lt;/年資&gt;</span><br><span class="line">&lt;/resume&gt;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://tea9297.github.io/akasha/2024/12/24/ui%E8%A8%AD%E5%AE%9A/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/akasha/images/avatar.gif">
-      <meta itemprop="name" content="Chih Chuan Chang<ccchang@iii.org.tw>">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="akasha 0.9 使用手冊">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/akasha/2024/12/24/ui%E8%A8%AD%E5%AE%9A/" class="post-title-link" itemprop="url">ui設定</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-
-              <time title="創建時間：2024-12-24 23:59:59" itemprop="dateCreated datePublished" datetime="2024-12-24T23:59:59+08:00">2024-12-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2024-10-21 11:39:36" itemprop="dateModified" datetime="2024-10-21T11:39:36+08:00">2024-10-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分類於</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/akasha/categories/UI/" itemprop="url" rel="index"><span itemprop="name">UI</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="安裝"><a href="#安裝" class="headerlink" title="安裝"></a>安裝</h2><p>只要你安裝了akasha，便可以直接使用akasha_ui，在terminal執行:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">akasha ui</span></span><br></pre></td></tr></table></figure>
-
-<p>便可以在瀏覽器上<a target="_blank" rel="noopener" href="http://localhost:8501/">開啟</a>，開始使用akasha ui</p>
-</br>
-</br>
-
-
-<h3 id="Docker安裝"><a href="#Docker安裝" class="headerlink" title="Docker安裝"></a>Docker安裝</h3><p>若要使用docker安裝，可以直接下載image</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker pull ccchang0518/akasha-ui:1.0</span></span><br></pre></td></tr></table></figure>
-
-<p>如要使用gpu來推論llama-cpp模型(.gguf)</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker pull ccchang0518/akasha-ui:llamacpp</span></span><br></pre></td></tr></table></figure>
-
-<p>執行image</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker run --gpus all -v ./model:/app/model  -v ./docs:/app/docs -v ./chromadb:/app/chromadb -p 8501:8501 akasha-llamacpp-ui:0.1</span></span><br></pre></td></tr></table></figure>
-
-
-</br>
-</br>
-
-<h2 id="上傳文件檔"><a href="#上傳文件檔" class="headerlink" title="上傳文件檔"></a>上傳文件檔</h2><p>上傳你需要的文件檔案，並取資料夾名稱，創立知識庫。</p>
-<p><em><strong>請注意文件檔只允許(.docx, .txt, .pdf)</strong></em></p>
-<p><img src="https://hackmd.io/_uploads/B1glkq19a.png" alt="ui_upload"></p>
-</br>
-</br>
-
-<h2 id="設定"><a href="#設定" class="headerlink" title="設定"></a>設定</h2><p>在設定頁面，可以選擇要詢問的知識庫和調整各種參數、選擇不同語言模型。</p>
-<p><em><strong>若使用openAI模型，請在左側輸入 openAI的key，azure openAI則需要額外輸入url。</strong></em></p>
-<p><img src="https://hackmd.io/_uploads/BJ0TRYJcT.png" alt="ui_setting"></p>
-<h2 id="手動增加模型"><a href="#手動增加模型" class="headerlink" title="手動增加模型"></a>手動增加模型</h2><p>如果你想使用不同的語言模型，可以至<a target="_blank" rel="noopener" href="https://huggingface.co/">huggingface</a>下載模型到”&#x2F;model”資料夾，模型便會加至設定中</p>
-<p><img src="https://hackmd.io/_uploads/SyS6g5yqa.png" alt="ui_model"></p>
-<p>設定完成後，便可開始使用akasha ui</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="https://tea9297.github.io/akasha/2024/12/24/ui%E6%93%8D%E4%BD%9C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -551,7 +178,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2024-08-30 11:06:26" itemprop="dateModified" datetime="2024-08-30T11:06:26+08:00">2024-08-30</time>
+                <time title="修改時間：2025-04-22 17:06:17" itemprop="dateModified" datetime="2025-04-22T17:06:17+08:00">2025-04-22</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -574,21 +201,25 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="get-response"><a href="#get-response" class="headerlink" title="get_response"></a>get_response</h2><p>確認設定中有選擇正確的知識庫後，在system_prompt中填入希望回答的格式，在prompt中填入問題，按下submit便可以執行文檔問答。<br><img src="https://hackmd.io/_uploads/BkmIZ9y5T.png" alt="ui_5"></p>
+          <h2 id="流式輸出"><a href="#流式輸出" class="headerlink" title="流式輸出"></a>流式輸出</h2><p>在畫面右邊選取stream，語言模型的回答將會是流式輸出</p>
+<p><img src="https://hackmd.io/_uploads/rkDW2RN1ex.png" alt="image"></p>
+<h2 id="RAG"><a href="#RAG" class="headerlink" title="RAG"></a>RAG</h2><p>確認設定中有選擇正確的知識庫後，在system_prompt中填入希望回答的格式，在下方填入問題，便可以執行文檔問答。<br><img src="https://hackmd.io/_uploads/HJB52N5Ayg.png" alt="ui_5"></p>
 </br>
 </br>
 
 
-<p>可以使用<em><strong>clear</strong></em> 按鈕清空對話欄，也可以使用左側<em><strong>Download Log</strong></em>按鈕下載紀錄<br><img src="https://hackmd.io/_uploads/H1MgEckqT.png" alt="image"></p>
-</br>
-</br>
-
-<h2 id="chain-of-thought"><a href="#chain-of-thought" class="headerlink" title="chain_of_thought"></a>chain_of_thought</h2><p>使用<em><strong>Add Prompt</strong></em> 按鈕增加子問題，便可以使用chain of thought先提問小問題並利用小問題的答案回答較為複雜的問題。<br><img src="https://hackmd.io/_uploads/HkEQG5kqa.png" alt="image"></p>
+<p>可以使用<em><strong>clear</strong></em> 按鈕清空對話欄，也可以使用左側<em><strong>Download Log</strong></em>按鈕下載紀錄<br><img src="https://hackmd.io/_uploads/SJ5f34qAyx.png" alt="image"></p>
 </br>
 </br>
 
 
 <h2 id="summary"><a href="#summary" class="headerlink" title="summary"></a>summary</h2><p>選擇summary方法與長度後，上傳單一文件檔便可得到該文檔的摘要。<br><img src="https://hackmd.io/_uploads/r15wQ9y96.png" alt="image"></p>
+</br>
+</br>
+
+
+<h2 id="websearch"><a href="#websearch" class="headerlink" title="websearch"></a>websearch</h2><p>選擇要使用的搜尋引擎與搜尋數量上限後，會根據問題進行網頁搜尋並回答問題</p>
+<p><img src="https://hackmd.io/_uploads/BJEvoCV1xe.png" alt="image"></p>
 
       
     </div>
@@ -673,16 +304,16 @@
       <div class="site-state-item site-state-posts">
           <a href="/akasha/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">21</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">分類</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">標籤</span>
       </div>
   </nav>

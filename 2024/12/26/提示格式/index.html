@@ -28,12 +28,12 @@
 <meta property="og:description" content="提示格式根據使用的語言模型不同，使用不同的格式來下指令可以得到更好的結果，akasha目前提供 gpt, llama, chat_gpt, chat_mistral, chat_gemini, auto 等格式若選擇 auto會根據模型類別來決定提示格式  gpt1234prompt_format &#x3D; System: &#123;system_prompt&#125; \n\n &#123;his">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2024-12-26T13:59:59.000Z">
-<meta property="article:modified_time" content="2024-12-03T09:18:18.868Z">
+<meta property="article:modified_time" content="2025-04-22T03:41:08.196Z">
 <meta property="article:author" content="Chih Chuan Chang&lt;ccchang@iii.org.tw&gt;">
 <meta property="article:tag" content="akasha-advanced">
-<meta property="article:tag" content="Doc_QA">
-<meta property="article:tag" content="Model_Eval">
-<meta property="article:tag" content="Summary">
+<meta property="article:tag" content="RAG">
+<meta property="article:tag" content="eval">
+<meta property="article:tag" content="summary">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://tea9297.github.io/akasha/2024/12/26/%E6%8F%90%E7%A4%BA%E6%A0%BC%E5%BC%8F/">
@@ -185,7 +185,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2024-12-03 17:18:18" itemprop="dateModified" datetime="2024-12-03T17:18:18+08:00">2024-12-03</time>
+                <time title="修改時間：2025-04-22 11:41:08" itemprop="dateModified" datetime="2025-04-22T11:41:08+08:00">2025-04-22</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -225,10 +225,10 @@
 <h4 id="chat-gemini"><a href="#chat-gemini" class="headerlink" title="chat_gemini"></a>chat_gemini</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">prompt_format =[&#123;&quot;role&quot;:&quot;model&quot;, &quot;parts&quot;: [&#123;system_prompt&#125;]&#125;,</span><br><span class="line">&#123;&quot;role&quot;:&quot;user&quot;, &quot;parts&quot;: [&#123;history msg1&#125;]&#125;,</span><br><span class="line">&#123;&quot;role&quot;:&quot;model&quot;, &quot;parts&quot;: [&#123;history msg2&#125;]&#125;,</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">&#123;&quot;role&quot;:&quot;user&quot;, &quot;parts&quot;: [&#123;prompt&#125;]&#125;]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 
-<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">import akasha</span><br><span class="line">sys_prompt = &quot;請用中文回答&quot;</span><br><span class="line">prompt = &quot;五軸是甚麼?&quot;</span><br><span class="line">qa = akasha.Doc_QA(</span><br><span class="line">    verbose=False, </span><br><span class="line">    search_type=&quot;svm&quot;, </span><br><span class="line">    model=&quot;openai:gpt-3.5-turbo&quot;)</span><br><span class="line"></span><br><span class="line">response = qa.get_response(</span><br><span class="line">        doc_path=&quot;docs/mic/&quot;,</span><br><span class="line">        prompt=prompt,</span><br><span class="line">        prompt_format_type=&quot;chat_gpt&quot;,</span><br><span class="line">        system_prompt=sys_prompt,</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">import akasha</span><br><span class="line">sys_prompt = &quot;請用中文回答&quot;</span><br><span class="line">prompt = &quot;五軸是甚麼?&quot;</span><br><span class="line">qa = akasha.RAG(</span><br><span class="line">    verbose=False, </span><br><span class="line">    search_type=&quot;svm&quot;, </span><br><span class="line">    model=&quot;openai:gpt-3.5-turbo&quot;,</span><br><span class="line">    prompt_format_type=&quot;chat_gpt&quot;)</span><br><span class="line"></span><br><span class="line">response = qa(</span><br><span class="line">        data_source=&quot;docs/mic/&quot;,</span><br><span class="line">        prompt=prompt,</span><br><span class="line">        system_prompt=sys_prompt,</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 
 
-<h2 id="Example2"><a href="#Example2" class="headerlink" title="Example2"></a>Example2</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import akasha</span><br><span class="line">sys_prompt = &quot;請用中文回答&quot;</span><br><span class="line">prompt = &quot;五軸是甚麼?&quot;</span><br><span class="line">input_text = akasha.prompts.format_sys_prompt(sys_prompt,prompt,&quot;chat_gpt&quot;)</span><br><span class="line">model_obj = akasha.handle_model(&quot;openai:gpt-3.5-turbo&quot;,False,0.0)</span><br><span class="line"></span><br><span class="line">response = akasha.call_model(model_obj, input_text)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="Example2"><a href="#Example2" class="headerlink" title="Example2"></a>Example2</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">import akasha</span><br><span class="line">import akasha.helper as ah</span><br><span class="line">from akasha.utils.prompts.gen_prompt import format_sys_prompt</span><br><span class="line"></span><br><span class="line">sys_prompt = &quot;請用中文回答&quot;</span><br><span class="line">prompt_format = &quot;chat_gpt&quot;</span><br><span class="line">prompt = &quot;五軸是甚麼?&quot;</span><br><span class="line">input_text = format_sys_prompt(sys_prompt,prompt,prompt_format)</span><br><span class="line">model_obj = akasha.handle_model(&quot;openai:gpt-3.5-turbo&quot;,False,0.0)</span><br><span class="line"></span><br><span class="line">response = ah.call_model(model_obj, input_text)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 
     </div>
@@ -240,9 +240,9 @@
       <footer class="post-footer">
           <div class="post-tags">
               <a href="/akasha/tags/akasha-advanced/" rel="tag"># akasha-advanced</a>
-              <a href="/akasha/tags/Doc-QA/" rel="tag"># Doc_QA</a>
-              <a href="/akasha/tags/Model-Eval/" rel="tag"># Model_Eval</a>
-              <a href="/akasha/tags/Summary/" rel="tag"># Summary</a>
+              <a href="/akasha/tags/RAG/" rel="tag"># RAG</a>
+              <a href="/akasha/tags/eval/" rel="tag"># eval</a>
+              <a href="/akasha/tags/summary/" rel="tag"># summary</a>
           </div>
 
         
@@ -330,16 +330,16 @@
       <div class="site-state-item site-state-posts">
           <a href="/akasha/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">21</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">分類</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">標籤</span>
       </div>
   </nav>
