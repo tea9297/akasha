@@ -28,7 +28,7 @@
 <meta property="og:description" content="選擇不同語言模型使用參數model便可以選擇不同的語言模型，預設是openai:gpt-3.5-turbo. 範例1. openai(請先完成設定 API Key) 12345import akashaakasha.RAG(embeddings&#x3D;&quot;openai:text-embedding-ada-002&quot;,                model&#x3D;&quot;openai:">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2024-12-30T13:59:59.000Z">
-<meta property="article:modified_time" content="2025-04-21T07:22:33.111Z">
+<meta property="article:modified_time" content="2025-04-22T03:34:06.523Z">
 <meta property="article:author" content="Chih Chuan Chang&lt;ccchang@iii.org.tw&gt;">
 <meta property="article:tag" content="akasha">
 <meta property="article:tag" content="RAG">
@@ -186,7 +186,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2025-04-21 15:22:33" itemprop="dateModified" datetime="2025-04-21T15:22:33+08:00">2025-04-21</time>
+                <time title="修改時間：2025-04-22 11:34:06" itemprop="dateModified" datetime="2025-04-22T11:34:06+08:00">2025-04-22</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -210,7 +210,7 @@
 
       
         <h2 id="選擇不同語言模型"><a href="#選擇不同語言模型" class="headerlink" title="選擇不同語言模型"></a>選擇不同語言模型</h2><p>使用參數<em><strong>model</strong></em>便可以選擇不同的語言模型，預設是<em><strong>openai:gpt-3.5-turbo</strong></em>.</p>
-<h2 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h2><h3 id="1-openai"><a href="#1-openai" class="headerlink" title="1. openai"></a>1. openai</h3><p>(請先完成<a href="2024/12/30/%E8%A8%AD%E5%AE%9A%20API%20Key/">設定 API Key</a>)</p>
+<h2 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h2><h3 id="1-openai"><a href="#1-openai" class="headerlink" title="1. openai"></a>1. openai</h3><p>(請先完成<a href="/akasha/2024/12/30/%E8%A8%AD%E5%AE%9A%20API%20Key/">設定 API Key</a>)</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import akasha</span><br><span class="line"></span><br><span class="line">akasha.RAG(embeddings=&quot;openai:text-embedding-ada-002&quot;,</span><br><span class="line">                model=&quot;openai:gpt-3.5-turbo&quot;)</span><br><span class="line">ak(dir_path, prompt, )</span><br></pre></td></tr></table></figure>
 
 </br>
@@ -235,13 +235,13 @@
 </br>
 
 <h3 id="4-遠端api"><a href="#4-遠端api" class="headerlink" title="4. 遠端api"></a>4. 遠端api</h3><p>如果你使用別人的api或者透過支援openAI api框架的部署自己的模型(例如vllm, TGI, litellm…)，你可以使用 <em><strong>remote:{your LLM api url}</strong></em> 來加載模型，若須指定模型名稱，使用 <em><strong>remote:{your LLM api url}@{your model name}</strong></em> 。</p>
-<p>若遠端api需要api金鑰，請先完成設定環境變數 <em><strong>REMOTE_API_KEY</strong></em> ，參考<a href="2024/12/30/%E8%A8%AD%E5%AE%9A%20API%20Key/">設定 API Key</a></p>
+<p>若遠端api需要api金鑰，請先完成設定環境變數 <em><strong>REMOTE_API_KEY</strong></em> ，參考<a href="/akasha/2024/12/30/%E8%A8%AD%E5%AE%9A%20API%20Key/">設定 API Key</a></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import akasha</span><br><span class="line"></span><br><span class="line">ak = akasha.RAG(model=&quot;remote:http://140.92.60.189:8081@llama-3.2-11B&quot;)</span><br><span class="line">ak(dir_path, prompt, )</span><br></pre></td></tr></table></figure>
 
 </br>
 </br>
 
-<h3 id="5-gemini"><a href="#5-gemini" class="headerlink" title="5. gemini"></a>5. gemini</h3><p>(請先完成<a href="2024/12/30/%E8%A8%AD%E5%AE%9A%20API%20Key/">設定 API Key</a>)</p>
+<h3 id="5-gemini"><a href="#5-gemini" class="headerlink" title="5. gemini"></a>5. gemini</h3><p>(請先完成<a href="/akasha/2024/12/30/%E8%A8%AD%E5%AE%9A%20API%20Key/">設定 API Key</a>)</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import akasha</span><br><span class="line"></span><br><span class="line">ak = akasha.RAG(embeddings=&quot;gemini:models/text-embedding-004&quot;,</span><br><span class="line">                model=&quot;gemini:gemini-1.5-flash&quot;)</span><br><span class="line">ak(dir_path, prompt, )</span><br></pre></td></tr></table></figure>
 
 
@@ -249,7 +249,7 @@
 </br>
 
 
-<h3 id="6-anthropic"><a href="#6-anthropic" class="headerlink" title="6. anthropic"></a>6. anthropic</h3><p>(請先完成<a href="2024/12/30/%E8%A8%AD%E5%AE%9A%20API%20Key/">設定 API Key</a>)</p>
+<h3 id="6-anthropic"><a href="#6-anthropic" class="headerlink" title="6. anthropic"></a>6. anthropic</h3><p>(請先完成<a href="/akasha/2024/12/30/%E8%A8%AD%E5%AE%9A%20API%20Key/">設定 API Key</a>)</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import akasha</span><br><span class="line"></span><br><span class="line">ask_tool = akasha.ask(model=&quot;anthropic:claude-3-5-sonnet-20241022&quot;)</span><br><span class="line">ask_tool( prompt, info=dir_path, )</span><br></pre></td></tr></table></figure>
 
 
