@@ -272,6 +272,123 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://tea9297.github.io/akasha/2024/12/27/gen_image/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/akasha/images/avatar.gif">
+      <meta itemprop="name" content="Chih Chuan Chang<ccchang@iii.org.tw>">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="akasha 0.9 使用手冊">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/akasha/2024/12/27/gen_image/" class="post-title-link" itemprop="url">gen_image</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2024-12-27 21:59:59" itemprop="dateCreated datePublished" datetime="2024-12-27T21:59:59+08:00">2024-12-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新於</span>
+                <time title="修改時間：2025-05-26 15:21:19" itemprop="dateModified" datetime="2025-05-26T15:21:19+08:00">2025-05-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/akasha/categories/%E5%8A%9F%E8%83%BD/" itemprop="url" rel="index"><span itemprop="name">功能</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="gen-image"><a href="#gen-image" class="headerlink" title="gen_image"></a>gen_image</h2><p><code>gen_image</code> 是一個結合語言模型與圖像生成的工具。可根據使用者的提示詞（prompt）生成圖片，或根據現有圖片進行編輯。支援 OpenAI、Azure OpenAI 及 Gemini 圖像模型，並可自訂圖片品質、尺寸與儲存路徑。</p>
+<p><em><strong>目前僅支援 openai&#x2F;azure openai 及 gemini（如 model&#x3D;”gemini:gemini-2.0-flash-preview-image-generation”）</strong></em></p>
+<ul>
+<li>若使用 openai 受保護模型（如 “gpt-image-1”），帳號需經過驗證。</li>
+<li>若使用 azure openai，請確保 <code>.env</code> 檔案中的 <code>AZURE_API_VERSION</code> 設為 <code>&quot;2025-04-01-preview&quot;</code>。</li>
+</ul>
+<hr>
+<h3 id="gen-image-功能"><a href="#gen-image-功能" class="headerlink" title="gen_image 功能"></a>gen_image 功能</h3><ol>
+<li><strong>圖片生成</strong>：根據提示詞生成圖片，支援多種模型與格式。</li>
+<li><strong>圖片編輯</strong>：可根據提示詞對現有圖片進行編輯，支援單張或多張圖片。</li>
+<li><strong>自訂參數</strong>：可設定圖片品質（high&#x2F;medium&#x2F;low）、尺寸（如 256x256, 512x512, 1024x1024）、儲存路徑等。</li>
+<li><strong>日誌保存</strong>：可選擇是否顯示詳細過程與結果。</li>
+</ol>
+<hr>
+<h3 id="gen-image-範例"><a href="#gen-image-範例" class="headerlink" title="gen_image 範例"></a>gen_image 範例</h3><h4 id="生成圖片"><a href="#生成圖片" class="headerlink" title="生成圖片"></a>生成圖片</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> akasha</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成圖片，可選擇模型、品質、尺寸與儲存路徑</span></span><br><span class="line">save_path = akasha.gen_image(</span><br><span class="line">    prompt=<span class="string">&quot;一隻可愛的絨毛娃娃，是北海道的長尾山雀，坐在白雪的樹枝上唱歌&quot;</span>,</span><br><span class="line">    model=<span class="string">&quot;gemini:gemini-2.0-flash-preview-image-generation&quot;</span>,</span><br><span class="line">    save_path=<span class="string">&quot;長尾山雀.png&quot;</span>,</span><br><span class="line">    env_file=<span class="string">&quot;.env3&quot;</span>,</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h4 id="編輯圖片"><a href="#編輯圖片" class="headerlink" title="編輯圖片"></a>編輯圖片</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> akasha</span><br><span class="line"></span><br><span class="line"><span class="comment"># 編輯現有圖片，可為單張或多張</span></span><br><span class="line">save_path = akasha.edit_image(</span><br><span class="line">    model=<span class="string">&quot;openai:gpt-image-1&quot;</span>,</span><br><span class="line">    prompt=<span class="string">&quot;增加一隻可愛的鯊魚娃娃在旁邊&quot;</span>,</span><br><span class="line">    images=<span class="string">&quot;長尾山雀.png&quot;</span>,</span><br><span class="line">    save_path=<span class="string">&quot;鯊鯊.png&quot;</span>,</span><br><span class="line">    env_file=<span class="string">&quot;.env3&quot;</span>,</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="gen-image-參數"><a href="#gen-image-參數" class="headerlink" title="gen_image 參數"></a>gen_image 參數</h3><h4 id="gen-image-初始化參數"><a href="#gen-image-初始化參數" class="headerlink" title="gen_image 初始化參數"></a>gen_image 初始化參數</h4><h5 id="prompt-str"><a href="#prompt-str" class="headerlink" title="prompt: str"></a>prompt: str</h5><p>生成圖片的提示詞。</p>
+<h5 id="save-path-str"><a href="#save-path-str" class="headerlink" title="save_path: str"></a>save_path: str</h5><p>圖片儲存路徑，可為 .png、.jpeg、.webp 等格式，預設為 “.&#x2F;image.png”。</p>
+<h5 id="model-str"><a href="#model-str" class="headerlink" title="model: str"></a>model: str</h5><p>使用的圖像生成模型，例如 <code>&quot;openai:gpt-image-1&quot;</code> 或 <code>&quot;gemini:gemini-2.0-flash-preview-image-generation&quot;</code>。</p>
+<h5 id="size-str"><a href="#size-str" class="headerlink" title="size: str"></a>size: str</h5><p>圖片尺寸（如 “256x256”、”512x512”、”1024x1024”），預設為 “auto”。</p>
+<h5 id="quality-str"><a href="#quality-str" class="headerlink" title="quality: str"></a>quality: str</h5><p>圖片品質，可選 “high”、”medium”、”low”，預設為 “auto”。</p>
+<h5 id="verbose-bool"><a href="#verbose-bool" class="headerlink" title="verbose: bool"></a>verbose: bool</h5><p>是否顯示詳細過程，預設為 False。</p>
+<h5 id="env-file-str"><a href="#env-file-str" class="headerlink" title="env_file: str"></a>env_file: str</h5><p>指定 <code>.env</code> 環境設定檔的路徑。</p>
+<hr>
+<h4 id="edit-image-初始化參數"><a href="#edit-image-初始化參數" class="headerlink" title="edit_image 初始化參數"></a>edit_image 初始化參數</h4><h5 id="prompt-str-1"><a href="#prompt-str-1" class="headerlink" title="prompt: str"></a>prompt: str</h5><p>編輯圖片的提示詞。</p>
+<h5 id="images-list-str-str-Path"><a href="#images-list-str-str-Path" class="headerlink" title="images: list[str] | str | Path"></a>images: list[str] | str | Path</h5><p>要編輯的圖片路徑，可為單張或多張。</p>
+<h5 id="save-path-str-1"><a href="#save-path-str-1" class="headerlink" title="save_path: str"></a>save_path: str</h5><p>編輯後圖片儲存路徑，預設為 “.&#x2F;image.png”。</p>
+<h5 id="model-str-1"><a href="#model-str-1" class="headerlink" title="model: str"></a>model: str</h5><p>使用的圖像生成模型，預設為 <code>&quot;openai:gpt-image-1&quot;</code>。</p>
+<h5 id="size-str-1"><a href="#size-str-1" class="headerlink" title="size: str"></a>size: str</h5><p>圖片尺寸，預設為 “auto”。</p>
+<h5 id="quality-str-1"><a href="#quality-str-1" class="headerlink" title="quality: str"></a>quality: str</h5><p>圖片品質，預設為 “auto”。</p>
+<h5 id="verbose-bool-1"><a href="#verbose-bool-1" class="headerlink" title="verbose: bool"></a>verbose: bool</h5><p>是否顯示詳細過程，預設為 False。</p>
+<h5 id="env-file-str-1"><a href="#env-file-str-1" class="headerlink" title="env_file: str"></a>env_file: str</h5><p>指定 <code>.env</code> 環境設定檔的路徑。</p>
+<hr>
+<h3 id="日誌與結果"><a href="#日誌與結果" class="headerlink" title="日誌與結果"></a>日誌與結果</h3><ul>
+<li>生成或編輯過程與結果可選擇顯示於終端機。</li>
+<li>圖片將儲存於指定路徑。</li>
+</ul>
+<hr>
+<h3 id="相關連結"><a href="#相關連結" class="headerlink" title="相關連結"></a>相關連結</h3><ul>
+<li><a href="/akasha/2024/12/30/%E8%A8%AD%E5%AE%9A%E8%AA%9E%E8%A8%80%E6%A8%A1%E5%9E%8B/">設定語言模型</a></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
     <link itemprop="mainEntityOfPage" href="https://tea9297.github.io/akasha/2024/12/26/%E6%8F%90%E7%A4%BA%E6%A0%BC%E5%BC%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -665,7 +782,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2025-04-22 16:29:21" itemprop="dateModified" datetime="2025-04-22T16:29:21+08:00">2025-04-22</time>
+                <time title="修改時間：2025-05-26 15:12:35" itemprop="dateModified" datetime="2025-05-26T15:12:35+08:00">2025-05-26</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -733,6 +850,14 @@
 </br>
 
 
+<h2 id="call-JSON-formatter"><a href="#call-JSON-formatter" class="headerlink" title="call_JSON_formatter"></a>call_JSON_formatter</h2><p>如果你想強制使語言模型輸出符合JSON格式的回答，可以使用 <em><strong>call_JSON_formatter</strong></em>，會轉換語言模型的輸出為字典或字典串列。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> akasha.helper <span class="keyword">as</span> ah</span><br><span class="line"><span class="keyword">from</span> pydantic <span class="keyword">import</span> BaseModel</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">PROMPT3 = <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">openai_model = &quot;openai:gpt-3.5-turbo&quot;  # need environment variable &quot;OPENAI_API_KEY&quot;</span></span><br><span class="line"><span class="string">gemini_model=&quot;gemini:gemini-1.5-flash&quot; # need environment variable &quot;GEMINI_API_KEY&quot;</span></span><br><span class="line"><span class="string">anthropic_model = &quot;anthropic:claude-3-5-sonnet-20241022&quot; # need environment variable &quot;ANTHROPIC_API_KEY&quot;</span></span><br><span class="line"><span class="string">huggingface_model = &quot;hf:meta-llama/Llama-2-7b-chat-hf&quot; #need environment variable &quot;HUGGINGFACEHUB_API_TOKEN&quot; to download meta-llama model</span></span><br><span class="line"><span class="string">qwen_model = &quot;hf:Qwen/Qwen2.5-7B-Instruct&quot;</span></span><br><span class="line"><span class="string">quantized_ch_llama_model = &quot;hf:FlagAlpha/Llama2-Chinese-13b-Chat-4bit&quot;</span></span><br><span class="line"><span class="string">taiwan_llama_gptq = &quot;hf:weiren119/Taiwan-LLaMa-v1.0-4bits-GPTQ&quot;</span></span><br><span class="line"><span class="string">mistral = &quot;hf:Mistral-7B-Instruct-v0.2&quot; </span></span><br><span class="line"><span class="string">mediatek_Breeze = &quot;hf:MediaTek-Research/Breeze-7B-Instruct-64k-v0.1&quot;</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line">model_obj = ah.handle_model(<span class="string">&quot;openai:gpt-4o&quot;</span>, <span class="literal">False</span>, <span class="number">0.0</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">## 使用BaseModel 指定輸出的keys</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Model_Type</span>(<span class="title class_ inherited__">BaseModel</span>):</span><br><span class="line">    model_type: <span class="built_in">str</span></span><br><span class="line">    model_name: <span class="built_in">str</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">json_response = ah.call_JSON_formatter(model_obj, PROMPT3, keys=Model_Type)</span><br><span class="line"><span class="built_in">print</span>(json_response)</span><br><span class="line"><span class="comment"># response: [&#123;&#x27;model_type&#x27;: &#x27;openai&#x27;, &#x27;model_name&#x27;: &#x27;gpt-3.5-turbo&#x27;&#125;, &#123;&#x27;model_type&#x27;: &#x27;gemini&#x27;, &#x27;model_name&#x27;: &#x27;gemini-1.5-flash&#x27;&#125;, &#123;&#x27;model_type&#x27;: &#x27;anthropic&#x27;, &#x27;model_name&#x27;: &#x27;claude-3-5-sonnet-20241022&#x27;&#125;,...</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+</br>
+</br>
+
+
 <h2 id="計算token數量"><a href="#計算token數量" class="headerlink" title="計算token數量"></a>計算token數量</h2><p><em><strong>Tokenizer.compute_tokens</strong></em>，此函數回傳該語言模型輸入的文字所需要的token數量<br><em><strong>get_doc_length</strong></em>，此函數使用jieba計算字串長度<br><em><strong>sim_to_trad</strong></em>，此函數將字串簡轉繁</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> akasha.helper <span class="keyword">as</span> ah</span><br><span class="line"></span><br><span class="line">text = <span class="string">&quot;你是一個歷史學家詳細介紹札幌的歷史&quot;</span></span><br><span class="line">model =  <span class="string">&quot;openai:gpt-3.5-turbo&quot;</span></span><br><span class="line">num_tokens = ah.myTokenizer.compute_tokens(</span><br><span class="line">    text=text, model_id=model)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(num_tokens)</span><br><span class="line"></span><br><span class="line"><span class="comment">### compute the length of the text by jieba ###</span></span><br><span class="line">doc_length = ah.get_doc_length(TEXT)</span><br><span class="line"></span><br><span class="line"><span class="comment">### translate simplified chinese to traditional chinese ###</span></span><br><span class="line">ret = ah.sim_to_trad(TEXT)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
@@ -791,7 +916,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2025-05-09 16:05:00" itemprop="dateModified" datetime="2025-05-09T16:05:00+08:00">2025-05-09</time>
+                <time title="修改時間：2025-06-04 14:40:48" itemprop="dateModified" datetime="2025-06-04T14:40:48+08:00">2025-06-04</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -829,7 +954,7 @@
 
 <h4 id="使用內建工具"><a href="#使用內建工具" class="headerlink" title="使用內建工具"></a>使用內建工具</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> akasha.agent.agent_tools <span class="keyword">as</span> at</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用內建的網頁搜尋工具和 JSON 保存工具</span></span><br><span class="line">tool_list = [at.websearch_tool(search_engine=<span class="string">&quot;brave&quot;</span>), at.saveJSON_tool()]</span><br><span class="line"></span><br><span class="line">agent = akasha.agents(</span><br><span class="line">    tools=tool_list,</span><br><span class="line">    model=<span class="string">&quot;openai:gpt-4o&quot;</span>,</span><br><span class="line">    temperature=<span class="number">1.0</span>,</span><br><span class="line">    max_input_tokens=<span class="number">8000</span>,</span><br><span class="line">    verbose=<span class="literal">True</span>,</span><br><span class="line">    keep_logs=<span class="literal">True</span>,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 問問題並使用工具回答</span></span><br><span class="line">response = agent(<span class="string">&quot;用網頁搜尋工業4.0，並將資訊存成json檔iii.json&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(response)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 保存日誌</span></span><br><span class="line">agent.save_logs(<span class="string">&quot;logs.json&quot;</span>)</span><br></pre></td></tr></table></figure>
 
-<h4 id="使用-MCP-伺服器上的工具"><a href="#使用-MCP-伺服器上的工具" class="headerlink" title="使用 MCP 伺服器上的工具"></a>使用 MCP 伺服器上的工具</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> asyncio</span><br><span class="line"><span class="keyword">import</span> akasha</span><br><span class="line"><span class="keyword">from</span> langchain_mcp_adapters.client <span class="keyword">import</span> MultiServerMCPClient</span><br><span class="line"></span><br><span class="line">MODEL = <span class="string">&quot;openai:gpt-4o&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 定義 MCP 伺服器連接資訊</span></span><br><span class="line">connection_info = &#123;</span><br><span class="line">    <span class="string">&quot;math&quot;</span>: &#123;</span><br><span class="line">        <span class="string">&quot;command&quot;</span>: <span class="string">&quot;python&quot;</span>,</span><br><span class="line">        <span class="string">&quot;args&quot;</span>: [<span class="string">&quot;cal_server.py&quot;</span>],</span><br><span class="line">        <span class="string">&quot;transport&quot;</span>: <span class="string">&quot;stdio&quot;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">&quot;weather&quot;</span>: &#123;</span><br><span class="line">        <span class="string">&quot;url&quot;</span>: <span class="string">&quot;http://localhost:8000/sse&quot;</span>,</span><br><span class="line">        <span class="string">&quot;transport&quot;</span>: <span class="string">&quot;sse&quot;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;</span><br><span class="line">prompt = <span class="string">&quot;tell me the weather in Taipei&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 MCP 工具</span></span><br><span class="line">agent = akasha.agents(</span><br><span class="line">    model=MODEL,</span><br><span class="line">    temperature=<span class="number">1.0</span>,</span><br><span class="line">    verbose=<span class="literal">True</span>,</span><br><span class="line">    keep_logs=<span class="literal">True</span>,</span><br><span class="line">)</span><br><span class="line"><span class="comment"># 問問題並使用 MCP 工具回答</span></span><br><span class="line">response = akasha.call_mcp_agent(agent, connection_info, prompt)</span><br><span class="line"><span class="comment"># 保存日誌</span></span><br><span class="line">agent.save_logs(<span class="string">&quot;logs_agent.json&quot;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="使用-MCP-伺服器上的工具"><a href="#使用-MCP-伺服器上的工具" class="headerlink" title="使用 MCP 伺服器上的工具"></a>使用 MCP 伺服器上的工具</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> asyncio</span><br><span class="line"><span class="keyword">import</span> akasha</span><br><span class="line"><span class="keyword">from</span> langchain_mcp_adapters.client <span class="keyword">import</span> MultiServerMCPClient</span><br><span class="line"></span><br><span class="line">MODEL = <span class="string">&quot;openai:gpt-4o&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 定義 MCP 伺服器連接資訊</span></span><br><span class="line">connection_info = &#123;</span><br><span class="line">    <span class="string">&quot;math&quot;</span>: &#123;</span><br><span class="line">        <span class="string">&quot;command&quot;</span>: <span class="string">&quot;python&quot;</span>,</span><br><span class="line">        <span class="string">&quot;args&quot;</span>: [<span class="string">&quot;cal_server.py&quot;</span>],</span><br><span class="line">        <span class="string">&quot;transport&quot;</span>: <span class="string">&quot;stdio&quot;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">&quot;weather&quot;</span>: &#123;</span><br><span class="line">        <span class="string">&quot;url&quot;</span>: <span class="string">&quot;http://localhost:8000/sse&quot;</span>,</span><br><span class="line">        <span class="string">&quot;transport&quot;</span>: <span class="string">&quot;sse&quot;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;</span><br><span class="line">prompt = <span class="string">&quot;tell me the weather in Taipei&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 MCP 工具</span></span><br><span class="line">agent = akasha.agents(</span><br><span class="line">    model=MODEL,</span><br><span class="line">    temperature=<span class="number">1.0</span>,</span><br><span class="line">    verbose=<span class="literal">True</span>,</span><br><span class="line">    keep_logs=<span class="literal">True</span>,</span><br><span class="line">)</span><br><span class="line"><span class="comment"># 問問題並使用 MCP 工具回答</span></span><br><span class="line">response = agent.mcp_agent(connection_info, prompt)</span><br><span class="line"><span class="comment"># 保存日誌</span></span><br><span class="line">agent.save_logs(<span class="string">&quot;logs_agent.json&quot;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <hr>
 <h3 id="agents-參數"><a href="#agents-參數" class="headerlink" title="agents 參數"></a>agents 參數</h3><h4 id="初始化參數"><a href="#初始化參數" class="headerlink" title="初始化參數"></a>初始化參數</h4><h5 id="tools-List-BaseTool"><a href="#tools-List-BaseTool" class="headerlink" title="tools: List[BaseTool]"></a>tools: List[BaseTool]</h5><p>工具列表，可以是自定義工具或內建工具。</p>
@@ -1218,100 +1343,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://tea9297.github.io/akasha/2024/12/24/ui%E8%A8%AD%E5%AE%9A/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/akasha/images/avatar.gif">
-      <meta itemprop="name" content="Chih Chuan Chang<ccchang@iii.org.tw>">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="akasha 0.9 使用手冊">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/akasha/2024/12/24/ui%E8%A8%AD%E5%AE%9A/" class="post-title-link" itemprop="url">ui設定</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-
-              <time title="創建時間：2024-12-24 23:59:59" itemprop="dateCreated datePublished" datetime="2024-12-24T23:59:59+08:00">2024-12-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2025-04-22 17:01:50" itemprop="dateModified" datetime="2025-04-22T17:01:50+08:00">2025-04-22</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分類於</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/akasha/categories/UI/" itemprop="url" rel="index"><span itemprop="name">UI</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="環境變數"><a href="#環境變數" class="headerlink" title="環境變數"></a>環境變數</h2><p>在畫面左側Environment File Path中填入.env的檔案路徑(預設.&#x2F;.env)，需填入相關API KEY才能使用OPENAI、GEMINI等模型，或使用網頁搜尋功能</p>
-<h2 id="安裝"><a href="#安裝" class="headerlink" title="安裝"></a>安裝</h2><p>只要你安裝了akasha，便可以簡單使用akasha_ui，在terminal執行:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">akasha toy</span></span><br></pre></td></tr></table></figure>
-
-<p>便可以在瀏覽器上<a target="_blank" rel="noopener" href="http://localhost:8501/">開啟</a>，開始使用akasha ui</p>
-</br>
-</br>
-
-
-<h2 id="上傳文件檔"><a href="#上傳文件檔" class="headerlink" title="上傳文件檔"></a>上傳文件檔</h2><p>上傳你需要的文件檔案，並取資料夾名稱，創立知識庫。</p>
-<p><em><strong>請注意文件檔只允許(.docx, .txt, .pdf)</strong></em></p>
-<p><img src="https://hackmd.io/_uploads/B1glkq19a.png" alt="ui_upload"></p>
-</br>
-</br>
-
-<h2 id="設定"><a href="#設定" class="headerlink" title="設定"></a>設定</h2><p>在設定頁面，可以選擇要詢問的知識庫和調整各種參數、選擇不同語言模型。</p>
-<p><em><strong>若使用openAI模型，請在左側輸入 openAI的key，azure openAI則需要額外輸入url。</strong></em></p>
-<p><img src="https://hackmd.io/_uploads/BJ0TRYJcT.png" alt="ui_setting"></p>
-<h2 id="手動增加模型"><a href="#手動增加模型" class="headerlink" title="手動增加模型"></a>手動增加模型</h2><p>如果你想使用不同的語言模型，可以至<a target="_blank" rel="noopener" href="https://huggingface.co/">huggingface</a>下載模型到”&#x2F;model”資料夾，模型便會加至設定中</p>
-<p><img src="https://hackmd.io/_uploads/SyS6g5yqa.png" alt="ui_model"></p>
-<p>設定完成後，便可開始使用akasha ui</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1381,7 +1412,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/akasha/archives/">
         
-          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-count">22</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -1390,7 +1421,7 @@
         <span class="site-state-item-name">分類</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-count">14</span>
         <span class="site-state-item-name">標籤</span>
       </div>
   </nav>
