@@ -20,17 +20,17 @@
     var CONFIG = {"hostname":"tea9297.github.io","root":"/akasha/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="AiiDOakasha也可以利用AiiDO來保存執行紀錄，您需要在 AiiDO 平台上創建一個項目。完成後，您將收到自動上傳實驗所需的所有參數。在程序的同一目錄下創建一個 .env 文件，並貼上所有參數。 12345##.env fileMINIO_URL&#x3D; YOUR_MINIO_URLMINIO_USER&#x3D; YOUR_MINIO_USERMINIO_PASSWORD&#x3D; YOUR_MINIO_PA">
+  <meta name="description" content="AiiDOakasha也可以利用MLflow來保存執行紀錄，您需要自行建立MLflow server。並將tracking server的url放在程序的同一目錄下的 .env 文件，TRACKING_SERVER_URI&#x3D; {YOUR_TRACKING_SERVER_URI}。 123##.env fileTRACKING_SERVER_URI&#x3D; YOUR_TRACKING_SERVE">
 <meta property="og:type" content="article">
 <meta property="og:title" content="輔助函數">
 <meta property="og:url" content="https://tea9297.github.io/akasha/2024/12/26/%E8%BC%94%E5%8A%A9%E5%87%BD%E6%95%B8/index.html">
 <meta property="og:site_name" content="akasha 0.9 使用手冊">
-<meta property="og:description" content="AiiDOakasha也可以利用AiiDO來保存執行紀錄，您需要在 AiiDO 平台上創建一個項目。完成後，您將收到自動上傳實驗所需的所有參數。在程序的同一目錄下創建一個 .env 文件，並貼上所有參數。 12345##.env fileMINIO_URL&#x3D; YOUR_MINIO_URLMINIO_USER&#x3D; YOUR_MINIO_USERMINIO_PASSWORD&#x3D; YOUR_MINIO_PA">
+<meta property="og:description" content="AiiDOakasha也可以利用MLflow來保存執行紀錄，您需要自行建立MLflow server。並將tracking server的url放在程序的同一目錄下的 .env 文件，TRACKING_SERVER_URI&#x3D; {YOUR_TRACKING_SERVER_URI}。 123##.env fileTRACKING_SERVER_URI&#x3D; YOUR_TRACKING_SERVE">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https://hackmd.io/_uploads/rkSjnt19p.png">
 <meta property="og:image" content="https://hackmd.io/_uploads/SyvahY1qp.png">
 <meta property="article:published_time" content="2024-12-26T11:59:59.000Z">
-<meta property="article:modified_time" content="2025-05-26T07:12:35.594Z">
+<meta property="article:modified_time" content="2025-06-12T01:16:37.024Z">
 <meta property="article:author" content="Chih Chuan Chang&lt;ccchang@iii.org.tw&gt;">
 <meta property="article:tag" content="akasha-advanced">
 <meta name="twitter:card" content="summary">
@@ -185,7 +185,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新於</span>
-                <time title="修改時間：2025-05-26 15:12:35" itemprop="dateModified" datetime="2025-05-26T15:12:35+08:00">2025-05-26</time>
+                <time title="修改時間：2025-06-12 09:16:37" itemprop="dateModified" datetime="2025-06-12T09:16:37+08:00">2025-06-12</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -208,13 +208,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="AiiDO"><a href="#AiiDO" class="headerlink" title="AiiDO"></a>AiiDO</h2><p>akasha也可以利用AiiDO來保存執行紀錄，您需要在 AiiDO 平台上創建一個項目。完成後，您將收到自動上傳實驗所需的所有參數。<br>在程序的同一目錄下創建一個 .env 文件，並貼上所有參數。</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">##.env file</span><br><span class="line">MINIO_URL= YOUR_MINIO_URL</span><br><span class="line">MINIO_USER= YOUR_MINIO_USER</span><br><span class="line">MINIO_PASSWORD= YOUR_MINIO_PASSWORD</span><br><span class="line">TRACKING_SERVER_URI= YOUR_TRACKING_SERVER_URI</span><br></pre></td></tr></table></figure>
+        <h2 id="AiiDO"><a href="#AiiDO" class="headerlink" title="AiiDO"></a>AiiDO</h2><p>akasha也可以利用MLflow來保存執行紀錄，您需要自行建立MLflow server。<br>並將tracking server的url放在程序的同一目錄下的 .env 文件，TRACKING_SERVER_URI&#x3D; {YOUR_TRACKING_SERVER_URI}。</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">##.env file</span><br><span class="line"></span><br><span class="line">TRACKING_SERVER_URI= YOUR_TRACKING_SERVER_URI</span><br></pre></td></tr></table></figure>
 
 
 
 <p>在創建了 .env 文件之後，您可以使用 record_exp 來設置實驗名稱，它將自動記錄實驗指標和結果到 mlflow 服務器。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">import akasha</span><br><span class="line">import os</span><br><span class="line">from dotenv import load_dotenv</span><br><span class="line">load_dotenv() </span><br><span class="line"></span><br><span class="line">os.environ[&quot;OPENAI_API_KEY&quot;] = &quot;your openAI key&quot;</span><br><span class="line"></span><br><span class="line">data_source = &quot;doc/&quot;</span><br><span class="line">prompt = &quot;「塞西莉亞花」的花語是什麼?	「失之交臂的感情」	「赤誠的心」	「浪子的真情」	「無法挽回的愛」&quot;</span><br><span class="line">exp_name = &quot;exp_akasha_get_response&quot;</span><br><span class="line">ak = akasha.RAG(record_exp=exp_name)</span><br><span class="line">response = ak.(data_source, prompt)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">import akasha</span><br><span class="line">import os</span><br><span class="line">from dotenv import load_dotenv</span><br><span class="line">load_dotenv() </span><br><span class="line"></span><br><span class="line">os.environ[&quot;OPENAI_API_KEY&quot;] = &quot;your openAI key&quot;</span><br><span class="line"></span><br><span class="line">data_source = &quot;doc/&quot;</span><br><span class="line">prompt = &quot;「塞西莉亞花」的花語是什麼?	「失之交臂的感情」	「赤誠的心」	「浪子的真情」	「無法挽回的愛」&quot;</span><br><span class="line">exp_name = &quot;exp_akasha_rag&quot;</span><br><span class="line">ak = akasha.RAG(record_exp=exp_name)</span><br><span class="line">response = ak.(data_source, prompt)</span><br></pre></td></tr></table></figure>
 
 </br>
 </br>
